@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Login from './Login/login'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <div>
         <Switch>
           <Route path="/login">
+            <Login />
           </Route>
         </Switch>
       </div>
