@@ -1,7 +1,24 @@
 .login-title {
     font-size: 4rem;
+    margin-left: 20%;
 }
 
 .login-inputs {
     width: 50% !important;
+}
+
+.login-form {
+    margin-top: 3%;
+    margin-left: 5%;
+}
+
+.login-form-submit-btn {
+    border-width: 2px !important;
+}
+
+.login-form-submit-btn:hover {
+    background-color: white !important;
+    color: #007bff !important;
+    border-width: 2px !important;
+    transition-duration: 0.3s;
 }
