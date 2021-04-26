@@ -9,12 +9,16 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "concurrently": "^6.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "require": "^2.4.20"
   },
   "scripts": {
     "start": "react-scripts start",
