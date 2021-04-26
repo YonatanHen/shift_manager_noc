@@ -11,7 +11,6 @@
     "bootstrap": "^4.6.0",
     "concurrently": "^6.0.2",
     "express": "^4.17.1",
-    "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
@@ -24,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"npm run start\" \"nodemon server/app.js\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
