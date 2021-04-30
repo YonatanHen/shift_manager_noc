@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 MongoClient.connect(
-	process.env.MONGODB_URL,
+	'mongodb+srv://noc:oPUkEnxQ3ZbPhV1y@cluster0.goc5j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
@@ -13,6 +13,6 @@ MongoClient.connect(
 		console.log('MongoDB is connected!')
 
 		//Global variable defined and will be reached by all scripts (routers) of App.js in server
-		global.db = client.db(process.env.DATABASE_NAME)
+		global.db = client.db('shift-manager')
 	}
 )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../css/login.css'
 import { Form, Button, Container } from 'react-bootstrap'
+import axios from 'axios'
 
 /**
  * Login function component
@@ -13,15 +14,24 @@ export default function Login(){
     /**
      * Function handles the sending of the entered data in form inputs, then fetch the respond from server
      */
-    const handleSubmit = () => {
-        alert(`send username ${username} and ${password} with axios`)
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        alert('adas')
+        axios.post('/login', {
+            username,
+            password
+        })
+        .then((response) => {
+            alert(response.data.msg)
+        })
+        .catch(error => console.log(error))
     }
 
     return (
         <>
         <Container>
             <div className='login-title'>Login</div>
-            <Form onSubmit={() => {handleSubmit()}} className='login-form'>
+            <Form onSubmit={handleSubmit} className='login-form'>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control className='login-inputs' placeholder="Enter Username" onChange={e => setUsername(e.target.value)}/>
