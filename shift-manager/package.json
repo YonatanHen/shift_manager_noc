@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.1.2",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -15,6 +16,8 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.6",
     "path": "^0.12.7",
+    "primeicons": "^4.1.0",
+    "primereact": "^6.3.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
@@ -24,9 +27,9 @@
     "require": "^2.4.20"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"npm run start\" \"nodemon server/app.js\""
   },
@@ -46,7 +49,10 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "autoprefixer": "^9.8.6",
+    "nodemon": "^2.0.7",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   },
   "proxy": "http://localhost:3001"
 }

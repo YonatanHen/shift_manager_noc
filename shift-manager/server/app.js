@@ -15,6 +15,18 @@ app.use(login)
 
 app.use(express.static(publicDirectoryPath))
 
+app.get('/getusers', async (req, res) => {
+    console.log('entered');
+    try {
+        
+        let users = await db.collection('users').find({})
+        console.log(users);
+            res.send(users)
+    } catch(err) {
+        res.send(err)
+    }
+}) 
+
 port = process.env.PORT || 3001
 
 app.get('/', (req,res) => {
@@ -22,7 +34,7 @@ app.get('/', (req,res) => {
 })
 
 app.listen(port, () => {
-    console.log(`App is listen to port ${port}`)
+    console.log(`App is listening to port ${port}`)
 })
 
 module.exports = app

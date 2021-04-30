@@ -6,12 +6,15 @@ router.post('/login', async (req, res) => {
     console.log(user)
     try {
         const isExist = await db.collection('users').findOne(user)
+        console.log('printing user isExist');
         console.log(isExist)
-        if(!isExist) 
+        if(!isExist) {
             return res.status(400).send({ msg: "User not found" })
-
-        //command will send status 200 by default
-        res.send({msg: "user logged in successfully."})
+        }
+        else {
+            res.status(200).send(isExist)
+        }
+        
 
     } catch(err) {
         res.status(500).send()
