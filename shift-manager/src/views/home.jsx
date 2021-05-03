@@ -5,7 +5,7 @@ import {connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import {setUser} from '../actions/index'
 import  {Calendar} from './calendar'
-import { Users } from './users'
+import Users  from './users'
 import {CreateReport} from './createReport'
 import {Reports} from './reports'
 import { Form, Button, Container } from 'react-bootstrap'
@@ -42,19 +42,18 @@ return (
                
                     <div className="p-4">
                     <Switch>
-
-                      <Route path="/calendar">
-                                <Calendar />
-                      </Route>
-                      <Route path="/reports">
-                                <Reports />
-                      </Route>
-                      <Route path="/createreport">
-                                <CreateReport />
-                      </Route>
-                      <Route path="/users">
-                                <Users />
-                      </Route>
+                                        <Route path="/calendar">
+                                                    <Calendar />
+                                        </Route>
+                                        <Route path="/reports">
+                                                    <Reports />
+                                        </Route>
+                                        <Route path="/createreport">
+                                                    <CreateReport />
+                                        </Route>
+                                        <Route path="/users">
+                                                    <Users />
+                                        </Route>
                       </Switch>
                     </div>
                   

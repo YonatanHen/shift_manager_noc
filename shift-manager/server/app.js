@@ -15,17 +15,7 @@ app.use(login)
 
 app.use(express.static(publicDirectoryPath))
 
-app.get('/getusers', async (req, res) => {
-    console.log('entered');
-    try {
-        
-        let users = await db.collection('users').find({})
-        console.log(users);
-            res.send(users)
-    } catch(err) {
-        res.send(err)
-    }
-}) 
+
 
 port = process.env.PORT || 3001
 

@@ -7,7 +7,7 @@ export const setUser = (user) => async (dispatch) => {
             })
 }
 export const getUsers = () => async (dispatch) => {
-    axios.get(URL+'/getusers').then((res) => {
+    axios.get('/getusers').then((res) => {
         console.log(res);
         dispatch({
             type: 'get_users',

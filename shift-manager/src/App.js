@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Login from './views/login'
 import Home from './views/home'
 import {connect } from 'react-redux'
+import 'primereact/resources/themes/saga-blue/theme.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import {getUsers} from './actions/index'
 function App(props) {
@@ -16,7 +19,9 @@ if(!props.User) {
   return <Router><Login /></Router>
 } 
 else {
-  return <Router><Home /></Router>
+  return <Router>
+           <Home />
+    </Router>
      }
 }
 const mapStatetoProps = (state) => {
