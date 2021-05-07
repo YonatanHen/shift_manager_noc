@@ -20,20 +20,16 @@ router.get('/reports', async (req,res) => {
 router.post('/add-report', async (req,res) => {
     const report = req.body
     try {
-        if(report.alerts == null)
-            reports.alerts.push() //TODO: should create alert object then add 'no unusual events' alert
+        if(report.alerts == [] || report.alerts == null)
+            reports.alerts.push('Nothing unusual.') 
 
         //Adding time to object
         report['timestamp'] = new Date()
-        
-        //Delete description field in case it is empty
-        if(report.description == '')
-            delete report.description
 
         //Save report in db
         await db.collection('reports').insert(report)
 
-        res.send({message: `Report about ${report.alert} added successfully`})
+        res.send({message: `Report at ${report.timestamp} added successfully`})
     } catch(e) {
         res.status(500).send(e) 
     }
@@ -43,7 +39,7 @@ router.get('/delete-report/:name', async(req,res) => {
     try {
         await db.collection('reports').findOneAndDelete({alert: req.body.params.name})
 
-        res.send({message: ``})
+        res.send({message: `report deleted successfully!`})
     } catch (e) {
         res.status.send(e)
     }
