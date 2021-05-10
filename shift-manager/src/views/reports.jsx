@@ -18,7 +18,7 @@ export const Reports = (props) => {
     var actionBody = (rowData) => <Button icon="pi pi-times" className="p-button-rounded p-button-danger" onClick={() => reportDelete(rowData)} />
     // Delete report method
     var reportDelete = () => {
-
+        // bla
     }
     return (
         <div >
