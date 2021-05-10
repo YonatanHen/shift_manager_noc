@@ -8,7 +8,8 @@ import  {Calendar} from './calendar'
 import Users  from './users'
 import {CreateReport} from './createReport'
 import {Reports} from './reports'
-import { Form, Button, Container } from 'react-bootstrap'
+// import { Form, Button, Container } from 'react-bootstrap'
+import {Button} from 'primereact/button'
  function Home(props){
 
     const history = useHistory()
@@ -31,10 +32,10 @@ return (
         <div className="fixed w-1/12 bg-gray-400 left-0 h-full text-center">
             <div className="font-light text-5xl mt-8">NOC</div>
             <ul className="space-y-2 p-2 mt-12">
-                <li><Button className="btn btn-light" onClick={calendarClick}>Shifts</Button></li>
-                <li><Button className="btn btn-light" onClick={reportsClick}>Reports</Button></li>
-                <li><Button className="btn btn-light" onClick={createReportClick}>Create Report</Button></li>
-                <li><Button className="btn btn-light" onClick={usersClick}>Users</Button></li>
+                <li><Button className="p-button-secondary" onClick={calendarClick}>Shifts</Button></li>
+                <li><Button className="p-button-secondary" onClick={reportsClick}>Reports</Button></li>
+                <li><Button className="p-button-secondary" onClick={createReportClick}>Create Report</Button></li>
+                <li><Button className="p-button-secondary" onClick={usersClick}>Users</Button></li>
             </ul>
 
         </div>

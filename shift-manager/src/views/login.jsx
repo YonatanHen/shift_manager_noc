@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../css/login.css'
-import { Form, Button, Container } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
+import {Button} from 'primereact/button'
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import {setUser} from '../actions/index'
@@ -36,14 +37,14 @@ function Login(props){
             <div className="rounded mr-auto ml-auto mt-40 w-1/6 h-2/5 " >
             <div className="w-40 login-title">Login</div>
             
-            <Form onSubmit={handleSubmit} className='login-form '>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Username</Form.Label>
+            <Form onSubmit={handleSubmit} className='login-form block space-y-4'>
+                <Form.Group controlId="formBasicEmail flex">
+                    <Form.Label className="mr-4">Username</Form.Label>
                     <Form.Control className='w-auto relative' placeholder="Enter Username" onChange={e => setUsername(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="mr-4">Password</Form.Label>
                     <Form.Control className='login-inputs' type="password" placeholder="Enter Password" onChange={e => setPassword(e.target.value)}/>
                 </Form.Group>
                 <Button variant="primary" type="submit" className='login-form-submit-btn'>

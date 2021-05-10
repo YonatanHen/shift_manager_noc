@@ -7,7 +7,7 @@ import {connect } from 'react-redux'
 import 'primereact/resources/themes/saga-blue/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
-import 'bootstrap/dist/css/bootstrap.css'
+
 import {getUsers} from './actions/index'
 function App(props) {
 

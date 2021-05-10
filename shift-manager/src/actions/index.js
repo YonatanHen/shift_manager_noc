@@ -17,3 +17,14 @@ export const getUsers = () => async (dispatch) => {
         console.log(err);
     })
 }
+export const getReports = () => async (dispatch) => {
+    axios.get('/getreports').then((res) => {
+        console.log(res);
+        dispatch({
+            type: 'get_reports',
+            list: res.data
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+}
