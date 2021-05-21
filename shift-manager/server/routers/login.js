@@ -1,6 +1,8 @@
-express = require("express");
-router = new express.Router();
+/* eslint-disable no-undef */
+const express = require("express");
+const router = new express.Router();
 var ObjectID = require("mongodb").ObjectID;
+
 router.post("/login", async (req, res) => {
   const user = req.body;
   console.log(user);
@@ -18,19 +20,19 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.get('/getusers', async (req, res) => {
-//     console.log('entered');
-//     try {
+router.get('/getusers', async (req, res) => {
+    console.log('entered');
+    try {
 
-//         let users = await db.collection('users').find().toArray(function (err, docs) {
+        let users = await db.collection('users').find().toArray(function (err, docs) {
 
-//             res.send(docs)
-//         })
+            res.send(docs)
+        })
 
-//     } catch(err) {
-//         res.send(err)
-//     }
-// })
+    } catch(err) {
+        res.send(err)
+    }
+})
 router.post("/adduser", async (req, res) => {
   try {
     let result = await db.collection("users").insertOne(req.body);

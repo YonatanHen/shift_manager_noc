@@ -1,7 +1,8 @@
-express = require('express')
+const express = require('express')
 const path = require('path')
 const login = require('./routers/login')
 const reports = require('./routers/reports')
+const shifts = require('./routers/shifts')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('./database/mongodb')
@@ -14,11 +15,12 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(login)
 app.use(reports)
+app.use(shifts)
 app.use(express.static(publicDirectoryPath))
 
 
 
-port = process.env.PORT || 3001
+const port = process.env.PORT || 3001
 
 app.get('/', (req,res) => {
     res.sendFile('index.html')

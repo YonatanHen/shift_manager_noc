@@ -1,5 +1,5 @@
-express = require('express')
-router = new express.Router()
+const express = require('express')
+const router = new express.Router()
 
 /**
  * HTTP GET req - returns all of the reports in the db
