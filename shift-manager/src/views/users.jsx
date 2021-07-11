@@ -8,7 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import {getUsers} from '../actions/index'
 import { OverlayPanel } from 'primereact/overlaypanel';
 import axios from 'axios'
-
+import { Skeleton } from 'primereact/skeleton';
 function Users (props)  {
     const [userName,setUserName] = useState('')
     const [fullName,setFullName] = useState('')
@@ -43,7 +43,11 @@ function Users (props)  {
             console.log(err);
         })
     }
-    
+    var skeletonBody = () => {
+        return (
+            <Skeleton width="2rem" />
+        )
+    }
     return (
         <div>
             <OverlayPanel ref={(el) => op = el}>
@@ -59,9 +63,9 @@ function Users (props)  {
             </OverlayPanel>
             <Toolbar left={leftButtons}></Toolbar>
             <DataTable value={props.users} >
-                <Column field="fullname" header="Name"></Column>
-                <Column field="username" header="User Name"></Column>
-                <Column field="pdid" header="PagerDuty ID"></Column>
+                <Column field="fullname" header="Name" body={skeletonBody}></Column>
+                <Column field="username" header="User Name" body={skeletonBody}></Column>
+                <Column field="pdid" header="PagerDuty ID" body={skeletonBody}></Column>
                 <Column body={actionBody} />
             </DataTable>
         </div>

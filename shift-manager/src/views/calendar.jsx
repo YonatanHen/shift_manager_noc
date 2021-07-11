@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { Skeleton } from 'primereact/skeleton';
 export const Calendar = (props) => {
     return (
-        <div>
-            Calendar
+        <div className="m-4">
+           <Skeleton width="100rem" height="50rem"  />
         </div>
     )
 }
