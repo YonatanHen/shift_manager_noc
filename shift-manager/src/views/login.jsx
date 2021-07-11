@@ -9,8 +9,8 @@ import {connect } from 'react-redux'
  * Login function component
  * @returns Login page content
  */
-function Login(props){
-    const BACKEND_IP = process.env.REACT_APP_BACKEND_IP
+ const Login = props => {
+    // const BACKEND_IP = process.env.REACT_APP_BACKEND_IP
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     let history = useHistory()
