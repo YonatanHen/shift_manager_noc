@@ -1,33 +1,36 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import {setUser} from '../actions/index'
 import { useOktaAuth } from '@okta/okta-react';
-import Protected from './Protected'
-import home from '../views/home'
-import SignInForm from './SignInForm';
-import OktaSignInWidget from './OktaSignInWidget';
-
- 
-
-
-const SignIn = ({ config }) => {
-  const onSuccess = (tokens) => {
-    oktaAuth.handleLoginRedirect(tokens);
-  };
-
-  const onError = (err) => {
-    console.log('error logging in', err);
-  }
-  const { authState } = useOktaAuth();
+import Protected from './Protected';
+import {connect } from 'react-redux'
+const SignIn = (props) => {
   const { oktaAuth } = useOktaAuth();
+  const { authState } = useOktaAuth();
 
-  
+  if (authState.isPending) {
+    return <div>Loading...</div>;
+  }
+  if(authState.isAuthenticated) {
+    oktaAuth.getUser().then(info => {
+      console.log(info);
+      props.setUser(info);
+      sessionStorage.setItem('email',info.email)
+      sessionStorage.setItem('name',info.name)
+    });
+  }
   return authState.isAuthenticated ?
-  <Redirect to={Protected}/> :
-  <OktaSignInWidget
-      config={config}
-      onSuccess={onSuccess}
-      onError={onError}/>;
-  
+     <Redirect to={Protected}/> :
+     oktaAuth.signInWithRedirect()
 };
-
-export default SignIn;
+const mapStatetoProps = (state) => {
+  return {
+  }
+}
+const mapDispatchToProps = {
+      setUser
+}
+export default connect(mapStatetoProps,mapDispatchToProps)(SignIn)
+ 
+ 
+ 

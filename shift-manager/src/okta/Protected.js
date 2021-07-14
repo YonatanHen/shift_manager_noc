@@ -1,3 +1,4 @@
 import React from 'react';
-
-export default () => <h3>Protected</h3>;
+import Home from '../views/home'
+import { BrowserRouter as Router ,Route, Switch} from 'react-router-dom';
+export default () =>      <Home />;

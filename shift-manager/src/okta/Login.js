@@ -2,8 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './OktaSignInWidget';
 import { useOktaAuth } from '@okta/okta-react';
-import SignIn from './SignIn';
-import SignInForm from './SignInForm';
 
 const Login = ({ config }) => {
   const { oktaAuth, authState } = useOktaAuth();
@@ -15,9 +13,9 @@ const Login = ({ config }) => {
   const onError = (err) => {
     console.log('error logging in', err);
   };
-  if (authState.isPending) {
-   // window.location.reload(true)
-  }
+
+  if (!authState) return null;
+
   return authState.isAuthenticated ?
     <Redirect to={{ pathname: '/' }}/> :
     <OktaSignInWidget

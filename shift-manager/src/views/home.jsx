@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
+import noclogo from '../assets/noclogo.png'
 import {connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import {setUser} from '../actions/index'
@@ -37,24 +38,21 @@ import { Form, Button, Container } from 'react-bootstrap'
    }
 return (
     <div className="">
-        <div className="fixed w-1/12 bg-gray-400 left-0 h-full text-center">
-            <div className="font-light text-5xl mt-8">NOC</div>
+        <div className="fixed w-1/12 left-0 h-full text-center shadow-lg" >
+            <img src={noclogo} /* style={{height: '50px',width: '350px'}} */ />
             <ul className="space-y-2 p-2 mt-12">
                 <li><Button className="btn btn-light" onClick={calendarClick}>Shifts</Button></li>
                 <li><Button className="btn btn-light" onClick={reportsClick}>Reports</Button></li>
                 <li><Button className="btn btn-light" onClick={createReportClick}>Create Report</Button></li>
                 <li><Button className="btn btn-light" onClick={usersClick}>Users</Button></li>
-                
             </ul>
-
         </div>
         <div className="ml-40 h-full w-11/12">
-               
-                    <div className="p-4">
+               <div style={{backgroundColor: '#5D737E'}} className="h-12 shadow-md"></div>
+                    <div className="p-1">
                     
                         <CompRender />
                     </div>
-                  
         </div>
 
     </div>

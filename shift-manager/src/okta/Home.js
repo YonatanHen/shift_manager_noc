@@ -1,16 +1,27 @@
 import React from 'react';
+import {connect } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
-
-const Home = () => {
-  const { authState, oktaAuth } = useOktaAuth();
+import {setUser} from '../actions/index'
+const Home = (props) => {
+  const { authState, oktaAuth, authService } = useOktaAuth();
   const history = useHistory();
 
-  if (authState.isPending) {
-    // window.location.reload(true)
-  }
+
   if(!authState.isAuthenticated) {
     history.push('/login')
+  }
+  if (authState.isPending) {
+    return <div>Loading, Please reload...</div>;
+  }
+  if(authState.isAuthenticated) {
+    history.push('/protected');
+    oktaAuth.getUser().then(info => {
+      console.log(info);
+      props.setUser(info);
+      sessionStorage.setItem('email',info.email)
+      sessionStorage.setItem('name',info.name)
+    });
   }
   const button = authState.isAuthenticated ?
     <button onClick={() => {oktaAuth.signOut()}}>Logout</button> :
@@ -24,4 +35,12 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+const mapStatetoProps = (state) => {
+  return {
+  }
+}
+const mapDispatchToProps = {
+      setUser
+}
+
+export default connect(mapStatetoProps,mapDispatchToProps)(Home)

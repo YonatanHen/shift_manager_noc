@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
-    "@okta/okta-auth-js": "^4.5.2",
+    "@okta/okta-auth-js": "^4.7.2",
     "@okta/okta-react": "^4.1.0",
-    "@okta/okta-signin-widget": "^5.7.0",
+    "@okta/okta-signin-widget": "^5.2.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
