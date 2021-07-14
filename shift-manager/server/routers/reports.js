@@ -24,7 +24,7 @@ router.post('/add-report', async (req,res) => {
             reports.alerts.push('Nothing unusual.') 
 
         //Adding time to object
-        report['timestamp'] = new Date()
+        report['time'] = new Date()
 
         //Save report in db
         await db.collection('reports').insert(report)
