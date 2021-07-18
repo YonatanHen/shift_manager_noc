@@ -4,7 +4,7 @@ const router = new express.Router()
 /**
  * HTTP GET req - returns all of the reports in the db
  */
-router.get('/reports', async (req,res) => {
+router.get('/getreports', async (req,res) => {
     try {
     const reports = await db.collection('reports').find({}) //Empty brackets will return all of the data.
     res.send(reports)
