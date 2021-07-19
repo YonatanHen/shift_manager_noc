@@ -9,7 +9,7 @@ import { Calendar } from './calendar'
 import { Skeleton } from 'primereact/skeleton';
 import Users from './users'
 import { CreateReport } from './createReport'
-import { Reports } from './reports'
+import Reports from './reports'
 import { Form, Button, Container } from 'react-bootstrap'
 function Home(props) {
     const [comp, setComp] = useState('')

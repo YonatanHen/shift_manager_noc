@@ -1,22 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import ReportsTable from './MutualUI/ReportsTable'
-import { ReportsData } from '../actions/index'
+import { getReports } from '../actions/index'
+import { useDispatch } from 'react-redux'
 
-export const Reports = (props) => {
+function Reports(props) {
+    useEffect(() => {
+         props.getReports()
+    }, [])
+    console.log(props.reportsData)
     return (
         <>
-            <ReportsTable headers={['id', 'reporter', 'date']}/>
+            <ReportsTable headers={['id', 'reporter', 'date']} tableData={props.reportsData} />
         </>
     )
 }
 
 const mapStateToProps = (state) => ({
-
+    reportsData: state.ReportsData
 })
 
 const mapDispatchToProps = {
-
+    getReports
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reports)

@@ -6,7 +6,8 @@ const router = new express.Router()
  */
 router.get('/getreports', async (req,res) => {
     try {
-    const reports = await db.collection('reports').find({}) //Empty brackets will return all of the data.
+    const reports = await db.collection('reports').find({}).toArray() //Empty brackets will return all of the data.
+    // console.log(reports) 
     res.send(reports)
     } catch(e) {
         res.status(500).send(e) 

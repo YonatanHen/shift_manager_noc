@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap'
 import ReportsTable from './MutualUI/ReportsTable'
+// import { getReports } from "./actions/index";
 
 export const CreateReport = (props) => {
     return (
@@ -57,7 +58,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    
+    // getReports
 }
 
 const RowStyle = {

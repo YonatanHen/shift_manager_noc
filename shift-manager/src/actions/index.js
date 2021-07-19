@@ -25,12 +25,14 @@ export const getHeaders = x => async (dispatch) => {
         })
 }
 
-export const getReports = () => async(dispatch) => {
+export const getReports = () => async (dispatch) => {
     axios.get('/getreports').then((res) => {
-        console.log(res)
+        // console.log(res)
         dispatch({
             type: 'get_reports',
             reports: res.data
         })
+    }).catch((err) => {
+        console.log(err)
     })
 }
