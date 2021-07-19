@@ -48,7 +48,7 @@ export const CreateReport = (props) => {
                     </Col>
                 </Row>
             </Container>
-            <ReportsTable headers={['id','date','reporter','environment']} arr = {[{ id: 1, date: 2021, reporter: 'yonatan', environment: 'staging' }, { id: 2, date: 2021, reporter: 'almog', environment: 'staging' }]} />
+            <ReportsTable headers={['id','date','reporter','environment']} tableData = {[{ id: 1, date: 2021, reporter: 'yonatan', environment: 'staging' }, { id: 2, date: 2021, reporter: 'almog', environment: 'staging' }]} />
         </div>
     )
 }

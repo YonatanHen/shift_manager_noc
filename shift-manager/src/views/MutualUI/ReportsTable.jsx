@@ -12,10 +12,12 @@ const ReportsTable = props => {
     // }
     return (
         <DataTable value={props.tableData.map(item => {
+            //Will catch both cases
             return {
                 'id': item._id,
                 'reporter': item.reporter,
-                'date': item.time
+                'date': item.time,
+                ...item
             }
         })}>
             {props.headers.map((item) => {
