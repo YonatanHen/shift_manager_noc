@@ -4,23 +4,18 @@ import { Column } from 'primereact/column';
 import { connect } from 'react-redux'
 import { getHeaders } from '../../actions/index'
 import { Dialog } from 'primereact/dialog';
+import { RenderEventsData } from '../functions/renderEvents'
 
 
 const ReportsTable = props => {
     const [selectedRow, selectedRowHandler] = useState(null)
     const [displayDialog, displayDialogHandler] = useState(false)
 
-    // // const onClick = () => {
-    // //         displayDialogHandler(true)
-    // // }
 
-    // const onHide = () => {
-    //         displayDialogHandler(true)
-    // }
 
     return (
         <>
-            <DataTable paginator rows={10} stripedRows selectionMode="single" selection={selectedRow} onSelectionChange={e => {
+            <DataTable paginator rows={10} stripedRows selectionMode="single" onSelectionChange={e => {
                 selectedRowHandler(e.value)
                 displayDialogHandler(true)
                 console.log(selectedRow) // you can see that when selection is changed, object details printed to the console.
@@ -42,9 +37,9 @@ const ReportsTable = props => {
                 })}
 
             </DataTable>
-            <Dialog header="Header" visible={displayDialog} style={{ width: '50vw' }} onHide={() => displayDialogHandler(false)}>
-                <p>{selectedRow.id}</p>
-            </Dialog>
+            <Dialog header="Header" visible={displayDialog} style={{ width: '100vw' }} onHide={() => displayDialogHandler(false)}>
+                {selectedRow && (<RenderEventsData row={selectedRow} />)}
+            </Dialog> 
         </>
     )
 }
