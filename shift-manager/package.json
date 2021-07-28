@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
+    "@fullcalendar/daygrid": "^5.8.0",
+    "@fullcalendar/react": "^5.8.0",
     "@okta/okta-auth-js": "^4.7.2",
     "@okta/okta-react": "^4.1.0",
     "@okta/okta-signin-widget": "^5.2.0",
