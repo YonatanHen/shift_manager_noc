@@ -1,60 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap'
-import ReportsTable from './MutualUI/ReportsTable'
-// import { getReports } from "./actions/index";
+import { Container, Row, Col, InputGroup, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap'
+
+
 
 export const CreateReport = (props) => {
     return (
         <div>
             <Container style={{ width: '100%' }}>
                 <Row style={RowStyle}>
-                    <Col>Production alerts:</Col>
-                    <Col>Staging alerts:</Col>
+                    <Col>Alert:</Col>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>
-                        <InputGroup>
-                            <FormControl as="textarea" />
-                        </InputGroup>
-                    </Col>
-                    <Col>
-                        <InputGroup>
-                            <FormControl as="textarea" />
-                        </InputGroup>
-                    </Col>
+                    <InputGroup>
+                        <FormControl as="textarea" style={{ height: 120 }} />
+                    </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
                     <Col>Alert info:</Col>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>
-                        <InputGroup>
-                            <FormControl as="textarea" />
-                        </InputGroup>
-                    </Col>
-                    <Col>
-                        <InputGroup>
-                            <FormControl as="textarea" />
-                        </InputGroup>
-                    </Col>
+                    <InputGroup>
+                        <FormControl as="textarea" style={{ height: 100 }} />
+                    </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>
-                        <Button>Add</Button>
-                    </Col>
-                    <Col>
-                        <Button>Add</Button>
-                    </Col>
+                    <DropdownButton id="dropdown-basic-button" title="Dropdown button" style={{marginRight: 30}}>
+                        <Dropdown.Item>Production</Dropdown.Item>
+                        <Dropdown.Item>Staging</Dropdown.Item>
+                    </DropdownButton>
+                    <Button>Add</Button>
                 </Row>
             </Container>
-            <ReportsTable headers={['id','date','reporter','environment']} tableData = {[{ id: 1, date: 2021, reporter: 'yonatan', environment: 'staging' }, { id: 2, date: 2021, reporter: 'almog', environment: 'staging' }]} />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    
+
 })
 
 const mapDispatchToProps = {
