@@ -18,7 +18,6 @@ const ReportsTable = props => {
             <DataTable paginator rows={10} stripedRows selectionMode="single" onSelectionChange={e => {
                 selectedRowHandler(e.value)
                 displayDialogHandler(true)
-                console.log(selectedRow) // you can see that when selection is changed, object details printed to the console.
             }} value={props.tableData.map(item => {
                 //Will catch both cases
                 return {
