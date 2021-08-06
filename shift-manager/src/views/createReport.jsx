@@ -4,6 +4,7 @@ import { Container, Row, Col, InputGroup, Form, Button, DropdownButton, Dropdown
 import { useState } from 'react'
 
 import CreateReportTable from './createReportTable'
+import { useEffect } from 'react'
 
 const PRODUCTION = 'production'
 const STAGING = 'staging'
@@ -19,6 +20,15 @@ export const CreateReport = (props) => {
 
     const [alerts, alertsHandler] = useState([])
 
+    useEffect(() => {
+        ///Need to fix the issue with the rerender
+        function setData() {
+            localStorage.setItem('alerts', JSON.stringify(alerts))
+        }
+        
+        setData()
+    }, [alerts])
+
     const handleOnChange = event => {
         if (event.target.name === 'alert') {
             inputHanlder({ ...input, alert: event.target.value })
@@ -30,7 +40,7 @@ export const CreateReport = (props) => {
         console.log(input)
     }
 
-    const initiazlizeInput = () => {
+    const initiazlizeInput = async () => {
         document.querySelectorAll('textarea').forEach(textarea => textarea.value = '')
         inputHanlder(initialInput)
     }
@@ -49,10 +59,11 @@ export const CreateReport = (props) => {
                 default:
                     alertsHandler([...alerts, input])
                     break
-            }  
+            }
         }
         //Clear on submit
         initiazlizeInput()
+        return
     }
 
     return (
@@ -83,7 +94,7 @@ export const CreateReport = (props) => {
                 </Row>
             </Container>
 
-            <CreateReportTable alerts={alerts}/>
+            <CreateReportTable />
         </div>
     )
 }
