@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { connect } from 'react-redux'
-import { getHeaders } from '../../actions/index'
+import { getHeaders } from '../actions/index'
 import { Dialog } from 'primereact/dialog';
-import { RenderEventsData } from '../functions/renderEvents'
+import { RenderEventsData } from './functions/renderEvents'
 
 
 const ReportsTable = props => {
@@ -36,7 +36,7 @@ const ReportsTable = props => {
                 })}
 
             </DataTable>
-            <Dialog header="Header" visible={displayDialog} style={{ width: '100vw' }} onHide={() => displayDialogHandler(false)}>
+            <Dialog visible={displayDialog} style={{ width: '90vw' }} onHide={() => displayDialogHandler(false)}>
                 {selectedRow && (<RenderEventsData row={selectedRow} />)}
             </Dialog> 
         </>

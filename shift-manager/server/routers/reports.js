@@ -26,6 +26,9 @@ router.post('/add-report', async (req,res) => {
 
         //Adding time to object
         report['time'] = new Date()
+        if (report['reporter'] === undefined) {
+            report['reporter'] = 'NOC'
+        }
 
         //Save report in db
         await db.collection('reports').insert(report)

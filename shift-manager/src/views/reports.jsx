@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import ReportsTable from './MutualUI/ReportsTable'
+import ReportsTable from './ReportsTable'
 import { getReports } from '../actions/index'
 import { useDispatch } from 'react-redux'
 
