@@ -17,10 +17,7 @@ const initialInput = {
 export const CreateReport = (props) => {
     const [input, inputHanlder] = useState(initialInput)
 
-    const [alerts, alertsHandler] = useState({
-        staging: [],
-        production: []
-    })
+    const [alerts, alertsHandler] = useState([])
 
     const handleOnChange = event => {
         if (event.target.name === 'alert') {
@@ -49,17 +46,13 @@ export const CreateReport = (props) => {
                 case undefined:
                     alert('Alert must have an environemnt!')
                     return
-                case PRODUCTION:
-                    alertsHandler({ ...alerts, production: [...alerts.production, input] })
-                    break
-                case STAGING:
-                    alertsHandler({ ...alerts, staging: [...alerts.staging, input] })
+                default:
+                    alertsHandler([...alerts, input])
                     break
             }  
         }
         //Clear on submit
         initiazlizeInput()
-        console.log(alerts)
     }
 
     return (
@@ -90,7 +83,7 @@ export const CreateReport = (props) => {
                 </Row>
             </Container>
 
-            <CreateReportTable />
+            <CreateReportTable alerts={alerts}/>
         </div>
     )
 }
