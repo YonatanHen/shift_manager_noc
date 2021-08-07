@@ -1,10 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { connect, useStore } from 'react-redux'
 import { Container, Row, Col, InputGroup, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import { useState } from 'react'
+import { setAlerts } from '../actions/index'
 
 import CreateReportTable from './createReportTable'
-import { useEffect } from 'react'
+
 
 const PRODUCTION = 'production'
 const STAGING = 'staging'
@@ -16,17 +17,13 @@ const initialInput = {
 }
 
 export const CreateReport = (props) => {
-    const [input, inputHanlder] = useState(initialInput)
+    const store = useStore()
 
+    const [input, inputHanlder] = useState(initialInput)
     const [alerts, alertsHandler] = useState([])
 
     useEffect(() => {
-        ///Need to fix the issue with the rerender
-        function setData() {
-            localStorage.setItem('alerts', JSON.stringify(alerts))
-        }
-        
-        setData()
+        console.log(store.getState())
     }, [alerts])
 
     const handleOnChange = event => {
@@ -40,13 +37,14 @@ export const CreateReport = (props) => {
         console.log(input)
     }
 
-    const initiazlizeInput = async () => {
+    const initiazlizeInput = () => {
         document.querySelectorAll('textarea').forEach(textarea => textarea.value = '')
         inputHanlder(initialInput)
     }
 
-    const addAlertHandler = event => {
+    const addAlertHandler = async (event) => {
         if (input.title === '' || input === initialInput) {
+            
             alert('Alert must have a title and environment!')
             return
         }
@@ -94,17 +92,17 @@ export const CreateReport = (props) => {
                 </Row>
             </Container>
 
-            <CreateReportTable />
+            {/* <CreateReportTable alerts={alerts} /> */}
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-
+    alerts: state.alerts
 })
 
 const mapDispatchToProps = {
-    // getReports
+    setAlerts
 }
 
 const RowStyle = {

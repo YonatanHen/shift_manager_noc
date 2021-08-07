@@ -4,6 +4,7 @@ import User from '../reducers/user'
 import Users from '../reducers/users'
 import TableData from '../reducers/tableData';
 import ReportsData from '../reducers/reports';
+import AlertsData from '../reducers/alerts'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     User,
     Users,
     TableData,
-    ReportsData
+    ReportsData,
+    AlertsData
     },
 });

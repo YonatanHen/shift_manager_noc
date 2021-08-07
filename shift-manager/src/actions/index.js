@@ -1,5 +1,6 @@
 import axios from 'axios'
 const URL = 'http://localhost:3001'
+
 export const setUser = (user) => async (dispatch) => {
             dispatch({
                 type: 'set_user',
@@ -34,5 +35,12 @@ export const getReports = () => async (dispatch) => {
         })
     }).catch((err) => {
         console.log(err)
+    })
+}
+
+export const setAlerts = alerts => async (dispatch) => {
+    dispatch({
+        type: 'set_alerts',
+        alerts: alerts
     })
 }
