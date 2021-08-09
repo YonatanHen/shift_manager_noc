@@ -16,18 +16,16 @@ const initialInput = {
     environment: undefined
 }
 
-export const CreateReport = (props) => {
+function CreateReport(props) {
     const store = useStore()
 
     const [input, inputHandler] = useState(initialInput)
-    const [alertsData, alertsHandler] = useState([])
+    const [alerts, alertsHandler] = useState(props.alertsData)
 
     useEffect(() => {
-        console.log(store.getState())
-        console.log(props.alerts)
-        // console.log(setAlerts)
-        // setAlerts(alertsData)
-    }, [alertsData])
+        console.log(props.alertsData)
+        props.setAlerts(alerts)
+    }, [alerts])
 
     const handleOnChange = event => {
         if (event.target.name === 'alert') {
@@ -56,7 +54,7 @@ export const CreateReport = (props) => {
                     alert('Alert must have an environemnt!')
                     return
                 default:
-                    alertsHandler([...alertsData, input])
+                    alertsHandler([...alerts, input])
                     break
             }
         }
@@ -93,13 +91,13 @@ export const CreateReport = (props) => {
                 </Row>
             </Container>
 
-            <CreateReportTable alerts={alertsData} />
+            <CreateReportTable />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    alerts: state.AlertsData
+    alertsData: state.alertsData
 })
 
 const mapDispatchToProps = {

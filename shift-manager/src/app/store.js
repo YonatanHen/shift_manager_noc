@@ -11,6 +11,6 @@ export const store = configureStore({
     User,
     Users,
     ReportsData,
-    AlertsData
+    alertsData: AlertsData
     },
 });

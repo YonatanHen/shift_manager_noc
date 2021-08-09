@@ -32,9 +32,11 @@ export const getReports = () => async (dispatch) => {
 }
 
 export const setAlerts = (alerts) => async (dispatch) => {
-    console.log('HIIIIIIIIIIIIIIIIIII')
-    dispatch({
+    try {dispatch({
         type: 'set_alerts',
-        AlertsData: alerts
+        alertsData: alerts
     })
+} catch (err) {
+    console.log(err)
+} 
 }
