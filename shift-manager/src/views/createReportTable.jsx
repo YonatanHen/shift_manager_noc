@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { connect, useStore } from 'react-redux'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
-import { setAlerts } from '../actions/index'
+import { setAlerts, sendReport } from '../actions/index'
 import { useEffect } from 'react'
+
 
 function CreateReportTable(props) {
 	let id = 0
-    const store = useStore()
 
-	const handleSubmit = () => {
-		//Axios request - add new reports
-		props.setAlerts([])
+	const handleSubmit = async () => {
+		props.sendReport(props.alerts, props.user.given_name + ' ' + props.user.family_name)
+		await props.setAlerts([])
 	}
 
 	const footer = (
@@ -48,7 +49,7 @@ function CreateReportTable(props) {
 				value={props.alerts.map((alert) => {
 					return {
 						id: id++,
-						alert: alert.alert,
+						alert: alert.title,
 						environment: alert.environment,
 					}
 				})}
@@ -65,11 +66,13 @@ function CreateReportTable(props) {
 }
 
 const mapStateToProps = (state) => ({
-    alerts: state.alertsData
+    alerts: state.alertsData,
+	user: state.User
 })
 
 const mapDispatchToProps = {
-    setAlerts
+    setAlerts,
+	sendReport
 }
 
 

@@ -11,8 +11,9 @@ const PRODUCTION = 'production'
 const STAGING = 'staging'
 
 const initialInput = {
-    alert: '',
-    info: '',
+    title: '',
+    content: '',
+    time: undefined,
     environment: undefined
 }
 
@@ -23,17 +24,19 @@ function CreateReport(props) {
     const [alerts, alertsHandler] = useState(props.alertsData)
 
     useEffect(() => {
-        console.log(props.alertsData)
+        console.log(store.getState())
         props.setAlerts(alerts)
     }, [alerts])
 
-    const handleOnChange = event => {
-        if (event.target.name === 'alert') {
-            inputHandler({ ...input, alert: event.target.value })
+    const handleOnChange = (event) => {
+        console.log(event.target.name)
+        if (event.target.name === 'title') {
+            inputHandler({ ...input, title: event.target.value })
         }
         else {
-            inputHandler({ ...input, info: event.target.value })
+            inputHandler({ ...input, content: event.target.value })
         }
+        
     }
 
     const initiazlizeInput = () => {
@@ -43,7 +46,6 @@ function CreateReport(props) {
 
     const addAlertHandler = async (event) => {
         if (input.title === '' || input === initialInput) {
-            
             alert('Alert must have a title and environment!')
             return
         }
@@ -54,6 +56,7 @@ function CreateReport(props) {
                     alert('Alert must have an environemnt!')
                     return
                 default:
+                    inputHandler({...input, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString()})
                     alertsHandler([...alerts, input])
                     break
             }
@@ -71,7 +74,7 @@ function CreateReport(props) {
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
-                        <Form.Control as="textarea" name="alert" style={{ height: 120 }} onChange={handleOnChange} />
+                        <Form.Control as="textarea" name="title" style={{ height: 120 }} onChange={handleOnChange} />
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
@@ -79,7 +82,7 @@ function CreateReport(props) {
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
-                        <Form.Control as="textarea" name="info" style={{ height: 100 }} onChange={handleOnChange} />
+                        <Form.Control as="textarea" name="content" style={{ height: 100 }} onChange={handleOnChange} />
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>

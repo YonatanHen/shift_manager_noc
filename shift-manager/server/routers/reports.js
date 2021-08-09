@@ -21,17 +21,28 @@ router.get('/getreports', async (req,res) => {
 router.post('/add-report', async (req,res) => {
     const report = req.body
     try {
-        if(report.alerts == [] || report.alerts == null)
+        if (report.alerts == [] || report.alerts == null)
             reports.alerts.push('Nothing unusual.') 
+        else {
+            
+        }
 
         //Adding time to object
-        report['time'] = new Date()
+        report['time'] = new Date().toUTCString()
         if (report['reporter'] === undefined) {
             report['reporter'] = 'NOC'
+        } else {
+            report['staging'] = new Object()
+            report['production'] = new Object()
+            try {
+            report['staging'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging')
+            report['production'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'production')
+            } catch (e) { console.log(e) }
+            //TODO: the same for follows
         }
 
         //Save report in db
-        await db.collection('reports').insert(report)
+        await db.collection('reports').insertOne(report)
 
         res.send({message: `Report at ${report.timestamp} added successfully`})
     } catch(e) {

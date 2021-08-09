@@ -1,5 +1,7 @@
 import axios from 'axios'
+
 const URL = 'http://localhost:3001'
+
 
 export const setUser = (user) => async (dispatch) => {
             dispatch({
@@ -21,7 +23,6 @@ export const getUsers = () => async (dispatch) => {
 
 export const getReports = () => async (dispatch) => {
     axios.get('/getreports').then((res) => {
-        // console.log(res)
         dispatch({
             type: 'get_reports',
             reports: res.data
@@ -32,11 +33,18 @@ export const getReports = () => async (dispatch) => {
 }
 
 export const setAlerts = (alerts) => async (dispatch) => {
-    try {dispatch({
+    await dispatch({
         type: 'set_alerts',
         alertsData: alerts
     })
-} catch (err) {
-    console.log(err)
-} 
+}
+
+export const sendReport = (alerts, reporter) => async (dispatch) => {
+    axios.post('/add-report', { alerts, reporter}).then((res) => {
+        dispatch({
+            type: 'send_report', 
+        })
+    }).catch((err) => {
+        console.log(err)
+    })
 }
