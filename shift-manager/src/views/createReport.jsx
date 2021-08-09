@@ -24,12 +24,10 @@ function CreateReport(props) {
     const [alerts, alertsHandler] = useState(props.alertsData)
 
     useEffect(() => {
-        console.log(store.getState())
-        props.setAlerts(alerts)
-    }, [alerts])
+        console.log(alerts)
+    }, [])
 
     const handleOnChange = (event) => {
-        console.log(event.target.name)
         if (event.target.name === 'title') {
             inputHandler({ ...input, title: event.target.value })
         }
@@ -61,6 +59,7 @@ function CreateReport(props) {
                     break
             }
         }
+        await props.setAlerts(alerts)
         //Clear on submit
         initiazlizeInput()
         return
@@ -94,7 +93,7 @@ function CreateReport(props) {
                 </Row>
             </Container>
 
-            <CreateReportTable />
+            <CreateReportTable/>
         </div>
     )
 }

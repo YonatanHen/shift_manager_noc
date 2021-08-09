@@ -33,6 +33,7 @@ export const getReports = () => async (dispatch) => {
 }
 
 export const setAlerts = (alerts) => async (dispatch) => {
+    console.log(alerts)
     await dispatch({
         type: 'set_alerts',
         alertsData: alerts
