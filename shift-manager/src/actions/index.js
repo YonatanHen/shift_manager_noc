@@ -19,13 +19,6 @@ export const getUsers = () => async (dispatch) => {
     })
 }
 
-export const getHeaders = x => async (dispatch) => {
-        dispatch({
-            type: 'create_reports_header',
-            headers: x
-        })
-}
-
 export const getReports = () => async (dispatch) => {
     axios.get('/getreports').then((res) => {
         // console.log(res)
@@ -38,9 +31,10 @@ export const getReports = () => async (dispatch) => {
     })
 }
 
-export const setAlerts = alerts => async (dispatch) => {
+export const setAlerts = (alerts) => async (dispatch) => {
+    console.log('HIIIIIIIIIIIIIIIIIII')
     dispatch({
         type: 'set_alerts',
-        alerts: alerts
+        AlertsData: alerts
     })
 }

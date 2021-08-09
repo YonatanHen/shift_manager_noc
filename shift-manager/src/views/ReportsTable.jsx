@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { connect } from 'react-redux'
-import { getHeaders } from '../actions/index'
 import { Dialog } from 'primereact/dialog';
 import { RenderEventsData } from './functions/renderEvents'
 
@@ -49,7 +48,7 @@ const mapStatetoProps = (state) => {
     }
 }
 const mapDispatchToProps = {
-    getHeaders
+
 }
 
 

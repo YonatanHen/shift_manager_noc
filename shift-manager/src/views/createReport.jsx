@@ -19,27 +19,28 @@ const initialInput = {
 export const CreateReport = (props) => {
     const store = useStore()
 
-    const [input, inputHanlder] = useState(initialInput)
-    const [alerts, alertsHandler] = useState([])
+    const [input, inputHandler] = useState(initialInput)
+    const [alertsData, alertsHandler] = useState([])
 
     useEffect(() => {
         console.log(store.getState())
-    }, [alerts])
+        console.log(props.alerts)
+        // console.log(setAlerts)
+        // setAlerts(alertsData)
+    }, [alertsData])
 
     const handleOnChange = event => {
         if (event.target.name === 'alert') {
-            inputHanlder({ ...input, alert: event.target.value })
+            inputHandler({ ...input, alert: event.target.value })
         }
         else {
-            inputHanlder({ ...input, info: event.target.value })
+            inputHandler({ ...input, info: event.target.value })
         }
-
-        console.log(input)
     }
 
     const initiazlizeInput = () => {
         document.querySelectorAll('textarea').forEach(textarea => textarea.value = '')
-        inputHanlder(initialInput)
+        inputHandler(initialInput)
     }
 
     const addAlertHandler = async (event) => {
@@ -55,7 +56,7 @@ export const CreateReport = (props) => {
                     alert('Alert must have an environemnt!')
                     return
                 default:
-                    alertsHandler([...alerts, input])
+                    alertsHandler([...alertsData, input])
                     break
             }
         }
@@ -85,20 +86,20 @@ export const CreateReport = (props) => {
                 </Row>
                 <Row style={RowStyle}>
                     <DropdownButton id="dropdown-basic-button" title="Environment" style={{ marginRight: 30 }}>
-                        <Dropdown.Item onSelect={() => inputHanlder({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
-                        <Dropdown.Item onSelect={() => inputHanlder({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
+                        <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
                     </DropdownButton>
                     <Button onClick={addAlertHandler}>Add</Button>
                 </Row>
             </Container>
 
-            {/* <CreateReportTable alerts={alerts} /> */}
+            <CreateReportTable alerts={alertsData} />
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    alerts: state.alerts
+    alerts: state.AlertsData
 })
 
 const mapDispatchToProps = {

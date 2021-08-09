@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect, useStore } from 'react-redux'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
-import { setAlerts } from '../actions/index'
+// import { setAlerts } from '../actions/index'
 import { useEffect } from 'react'
 
 const CreateReportTable = (props) => {
 	let id = 0
+    const store = useStore()
 
 	const handleSubmit = () => {
 		//Axios request - add new reports
@@ -64,11 +65,11 @@ const CreateReportTable = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    alerts: state.alerts
+    alerts: state.AlertsData
 })
 
 const mapDispatchToProps = {
-    setAlerts
+    // setAlerts
 }
 
 
