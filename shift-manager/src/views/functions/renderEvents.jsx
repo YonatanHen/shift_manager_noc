@@ -61,9 +61,9 @@ export const RenderEventsData = props => {
             {' '}
             <h4>Staging:</h4>
             <h6>Alerts:</h6>
-            <Carousel value={props.row.staging} itemTemplate={alertsCarousel} numVisible={1} numScroll={1} />
+            <Carousel value={props.row.staging} itemTemplate={alertsCarousel} numVisible={1} />
             <h6>To Follow:</h6>
-            <Carousel value={props.row.staging} itemTemplate={followsCarousel} numVisible={1} numScroll={1} />
+            <Carousel value={props.row.staging} itemTemplate={followsCarousel} numVisible={1} />
         </>
     )
 }
