@@ -26,7 +26,7 @@ function CreateReport(props) {
             inputHandler({ ...input, title: event.target.value })
         }
         else {
-            inputHandler({ ...input, content: event.target.value })
+            inputHandler({ ...input, content: event.target.value, time:  new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
         }    
     }
 
@@ -35,7 +35,8 @@ function CreateReport(props) {
         inputHandler(initialInput)
     }
 
-    const addAlertHandler = async (event) => {
+    const addAlertHandler = useCallback(async (event) => {
+        inputHandler({ ...input, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
         if (input.title === '' || input === initialInput) {
             alert('Alert must have a title and environment!')
             return
@@ -47,7 +48,6 @@ function CreateReport(props) {
                     alert('Alert must have an environemnt!')
                     return
                 default:
-                    inputHandler({...input, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString()})
                     await props.setAlerts([...props.alertsData, input])
                     break
             }
@@ -56,8 +56,7 @@ function CreateReport(props) {
 
         //Clear on submit
         initiazlizeInput()
-        return
-    }
+    }, [input])
 
     return (
         <div>

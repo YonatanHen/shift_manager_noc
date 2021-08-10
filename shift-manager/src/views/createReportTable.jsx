@@ -13,7 +13,7 @@ function CreateReportTable(props) {
 
 	const handleSubmit = async () => {
 		await props.setAlerts([])
-		// props.sendReport(props.alerts, props.user ? props.user.given_name + ' ' + props.user.family_name : 'NOC')
+		props.sendReport(props.alerts, props.user ? props.user.given_name + ' ' + props.user.family_name : 'NOC')
 	}
 
 	const footer = (
