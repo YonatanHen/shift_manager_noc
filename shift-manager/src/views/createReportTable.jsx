@@ -5,7 +5,7 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
 import { setAlerts, sendReport } from '../actions/index'
-import { useEffect } from 'react'
+import { useCallback } from 'react'
 
 
 function CreateReportTable(props) {

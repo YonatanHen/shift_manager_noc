@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { connect, useStore } from 'react-redux'
 import { Container, Row, Col, InputGroup, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import { useState } from 'react'
@@ -18,14 +18,8 @@ const initialInput = {
 }
 
 function CreateReport(props) {
-    const store = useStore()
 
     const [input, inputHandler] = useState(initialInput)
-    const [alerts, alertsHandler] = useState(props.alertsData)
-
-    useEffect(() => {
-        console.log(alerts)
-    }, [])
 
     const handleOnChange = (event) => {
         if (event.target.name === 'title') {
@@ -33,8 +27,7 @@ function CreateReport(props) {
         }
         else {
             inputHandler({ ...input, content: event.target.value })
-        }
-        
+        }    
     }
 
     const initiazlizeInput = () => {
@@ -55,11 +48,12 @@ function CreateReport(props) {
                     return
                 default:
                     inputHandler({...input, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString()})
-                    alertsHandler([...alerts, input])
+                    await props.setAlerts([...props.alertsData, input])
                     break
             }
         }
-        await props.setAlerts(alerts)
+        console.log(props.alertsData)
+
         //Clear on submit
         initiazlizeInput()
         return
@@ -93,7 +87,7 @@ function CreateReport(props) {
                 </Row>
             </Container>
 
-            <CreateReportTable/>
+            <CreateReportTable alertsArray={props.alertsData}/>
         </div>
     )
 }
