@@ -3,8 +3,9 @@ import { connect, useStore } from 'react-redux'
 import { Container, Row, Col, InputGroup, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import { useState } from 'react'
 import { setAlerts } from '../actions/index'
+import { Toast } from 'primereact/toast';
 
-import CreateReportTable from './createReportTable'
+import CreateReportTable from './create-report-components/createReportTable'
 
 
 const PRODUCTION = 'production'
