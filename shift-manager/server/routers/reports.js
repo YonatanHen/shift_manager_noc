@@ -41,6 +41,9 @@ router.post('/add-report', async (req,res) => {
             //TODO: the same for follows
         }
 
+        delete report['alerts']
+        delete report['follows']
+        
         //Save report in db
         await db.collection('reports').insertOne(report)
 
