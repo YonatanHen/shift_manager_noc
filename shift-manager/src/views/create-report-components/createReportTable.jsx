@@ -1,26 +1,32 @@
-import React, { Component } from 'react'
+import React, { useRef } from 'react'
 import axios from 'axios'
 import { connect, useStore } from 'react-redux'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
-import { setAlerts, sendReport } from '../actions/index'
+import { setAlerts, sendReport } from '../../actions/index'
 import { useCallback } from 'react'
 
 
 function CreateReportTable(props) {
 	let id = 0
+	const toast = useRef(null);
 
 	const handleSubmit = async () => {
 		await props.setAlerts([])
 		props.sendReport(props.alerts, props.user ? props.user.given_name + ' ' + props.user.family_name : 'NOC')
 	}
 
+	const accept = () => {
+        toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    };
+
 	const footer = (
 		<Button
 			label='Submit report!'
 			className='p-button-success'
 			onClick={handleSubmit}
+			accept={accept}
 		/>
 	)
 
@@ -45,7 +51,7 @@ function CreateReportTable(props) {
 	return (
 		<>
 			<DataTable
-				footer={footer}
+				footer={props.alerts.length != 0 ? footer : undefined}
 				value={props.alerts.map((alert) => {
 					return {
 						id: id++,

@@ -3,7 +3,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { connect } from 'react-redux'
 import { Dialog } from 'primereact/dialog';
-import { RenderEventsData } from './functions/renderEvents'
+import { RenderEventsData } from './reportWindow'
 
 
 const ReportsTable = props => {

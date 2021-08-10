@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import ReportsTable from './ReportsTable'
+import ReportsTable from './reports-components/reportsTable'
 import { getReports } from '../actions/index'
 import { useDispatch } from 'react-redux'
 
