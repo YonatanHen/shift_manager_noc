@@ -21,35 +21,34 @@ function CreateReportTable(props) {
 		props.sendReport(props.alerts, props.user ? props.user.given_name + ' ' + props.user.family_name : 'NOC')
 	}
 
-	const accept = () => {
-		toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-	};
+	// const accept = () => {
+	// 	toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+	// };
 
 	const footer = (
 		<Button
 			label='Submit report!'
 			className='p-button-success'
 			onClick={handleSubmit}
-			accept={accept}
 		/>
 	)
 
-	const actionTemplate = (node, column) => {
-		return (
-			<div>
-				<Button
-					type='button'
-					icon='pi pi-pencil'
-					className='p-button-warning'
-				></Button>
-			</div>
-		)
-	}
+	// const actionTemplate = (node, column) => {
+	// 	return (
+	// 		<div>
+	// 			<Button
+	// 				type='button'
+	// 				icon='pi pi-pencil'
+	// 				className='p-button-warning'
+	// 			></Button>
+	// 		</div>
+	// 	)
+	// }
 
 	return (
 		<>
 			<DataTable stripedRows selectionMode="single" onSelectionChange={e => {
-				selectedRowHandler(e.value)
+				selectedRowHandler(props.alerts.find(alert => e.value.alert === alert.title))
 				displayDialogHandler(true)
 			}}
 				footer={props.alerts.length != 0 ? footer : undefined}
@@ -64,12 +63,12 @@ function CreateReportTable(props) {
 				<Column field='alert' header='Alert title'></Column>
 				<Column field='environment' header='Environment'></Column>
 				<Column
-					body={actionTemplate}
+					// body={actionTemplate}
 					style={{ textAlign: 'center', width: '8em' }}
 				/>
 			</DataTable>
 			<Dialog visible={displayDialog} style={{ width: '90vw' }} onHide={() => displayDialogHandler(false)}>
-				{selectedRow && (<EditReportScreen row={selectedRow} />)}
+				{selectedRow && (<EditReportScreen row={selectedRow} displayDialogHandler={displayDialogHandler}/>)}
 			</Dialog>
 		</>
 	)

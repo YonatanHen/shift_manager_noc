@@ -11,24 +11,31 @@ import CreateReportTable from './create-report-components/createReportTable'
 const PRODUCTION = 'production'
 const STAGING = 'staging'
 
+
 const initialInput = {
+    id: 0,
     title: '',
     content: '',
     time: undefined,
     environment: undefined
 }
 
-function CreateReport(props) {
 
+function CreateReport(props) {
     const [input, inputHandler] = useState(initialInput)
+    const [id, idHandler] = useState(0)
+
+    useEffect(() => {
+        inputHandler({ ...input, id: id, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
+    }, [id])
 
     const handleOnChange = (event) => {
         if (event.target.name === 'title') {
             inputHandler({ ...input, title: event.target.value })
         }
         else {
-            inputHandler({ ...input, content: event.target.value, time:  new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
-        }    
+            inputHandler({ ...input, content: event.target.value, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
+        }
     }
 
     const initiazlizeInput = () => {
@@ -36,8 +43,7 @@ function CreateReport(props) {
         inputHandler(initialInput)
     }
 
-    const addAlertHandler = useCallback(async (event) => {
-        inputHandler({ ...input, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
+    const addAlertHandler = (event) => {
         if (input.title === '' || input === initialInput) {
             alert('Alert must have a title and environment!')
             return
@@ -49,7 +55,8 @@ function CreateReport(props) {
                     alert('Alert must have an environemnt!')
                     return
                 default:
-                    await props.setAlerts([...props.alertsData, input])
+                    props.setAlerts([...props.alertsData, input])
+                    idHandler(x => x + 1)
                     break
             }
         }
@@ -57,7 +64,7 @@ function CreateReport(props) {
 
         //Clear on submit
         initiazlizeInput()
-    }, [input])
+    }
 
     return (
         <div>
@@ -87,7 +94,7 @@ function CreateReport(props) {
                 </Row>
             </Container>
 
-            <CreateReportTable alertsArray={props.alertsData}/>
+            <CreateReportTable alertsArray={props.alertsData} />
         </div>
     )
 }
