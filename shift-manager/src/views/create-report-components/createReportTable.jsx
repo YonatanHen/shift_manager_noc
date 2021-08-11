@@ -48,7 +48,7 @@ function CreateReportTable(props) {
 	return (
 		<>
 			<DataTable stripedRows selectionMode="single" onSelectionChange={e => {
-				selectedRowHandler(props.alerts.find(alert => e.value.alert === alert.title))
+				selectedRowHandler(props.alerts.find(alert => e.value.id === alert.id))
 				displayDialogHandler(true)
 			}}
 				footer={props.alerts.length != 0 ? footer : undefined}

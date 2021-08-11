@@ -17,8 +17,12 @@ const EditReportScreen = props => {
     }
 
     const editAlertHandler = () => {
-        const editedAlert = props.alerts.find(alert => props.row.title === alert.title)
-        console.log(editedAlert)
+        const editedAlert = props.alerts.find(alert => props.row.id === alert.id)
+        props.setAlerts(props.alerts.map(alert => {
+            if (alert.id === editedAlert.id) {
+                return input
+            }
+        }))
 
         //Closing the window
         props.displayDialogHandler(false)
