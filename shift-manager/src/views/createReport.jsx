@@ -25,9 +25,10 @@ const initialInput = {
 function CreateReport(props) {
     const [input, inputHandler] = useState(initialInput)
     const [id, idHandler] = useState(0)
+    const date = new Date().toLocaleString("en-US", {timeZone: "Asia/Jerusalem"})
 
     useEffect(() => {
-        inputHandler({ ...input, id: id, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
+        inputHandler({ ...input, id: id, time: date })
     }, [id])
 
     const handleOnChange = (event) => {
@@ -35,7 +36,7 @@ function CreateReport(props) {
             inputHandler({ ...input, title: event.target.value })
         }
         else {
-            inputHandler({ ...input, content: event.target.value, time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds().toString() })
+            inputHandler({ ...input, content: event.target.value, time: date })
         }
     }
 
