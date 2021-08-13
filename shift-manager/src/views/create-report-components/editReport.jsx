@@ -28,11 +28,20 @@ const EditReportScreen = props => {
         props.displayDialogHandler(false)
     }
 
+    const deleteAlertHandler = () => {
+        const editedAlert = props.alerts.find(alert => props.row.id === alert.id)
+        props.setAlerts(props.alerts.filter(alert => alert !== editedAlert))
+
+        //Closing the window
+        props.displayDialogHandler(false)
+    }
+
     return (
         <>
             <Container style={{ width: '100%' }}>
+                <h1>Edit/Delete Report</h1>
                 <Row style={RowStyle}>
-                    <Col>Alert:</Col>
+                    <Col>Title:</Col>
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
@@ -40,7 +49,7 @@ const EditReportScreen = props => {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>Alert info:</Col>
+                    <Col>Info:</Col>
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
@@ -48,7 +57,8 @@ const EditReportScreen = props => {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <Button onClick={editAlertHandler}>Edit alert</Button>
+                    <Button onClick={editAlertHandler} style={{marginRight: 10}} >Edit Alert</Button>
+                    <Button onClick={deleteAlertHandler} variant="secondary">Delete Alert</Button>
                 </Row>
             </Container>
         </>

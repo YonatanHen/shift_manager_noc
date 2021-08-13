@@ -33,25 +33,13 @@ function CreateReportTable(props) {
 				onClick={handleSubmit}
 			/>
 			<Button
-				label='Clear!'
+				label='Clear'
 				className='p-button-danger'
 				onClick={async() => await props.setAlerts([])}
 			/>
 		</>
 	)
-
-	// const actionTemplate = (node, column) => {
-	// 	return (
-	// 		<div>
-	// 			<Button
-	// 				type='button'
-	// 				icon='pi pi-pencil'
-	// 				className='p-button-warning'
-	// 			></Button>
-	// 		</div>
-	// 	)
-	// }
-
+	
 	return (
 		<>
 			<DataTable stripedRows selectionMode="single" onSelectionChange={e => {

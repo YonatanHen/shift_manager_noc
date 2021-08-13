@@ -58,9 +58,9 @@ function CreateReport(props) {
                     return
                 default:
                     if (isAlert) {
-                        props.setAlerts([...props.alertsData, {...input, type: 'alert'}])
+                        props.setAlerts([...props.alertsData, {...input, type: 'Alert'}])
                     } else {
-                        props.setAlerts([...props.alertsData, {...input, type: 'follow'}])
+                        props.setAlerts([...props.alertsData, {...input, type: 'Follow'}])
                     }
                     idHandler(x => x + 1)
                     break
