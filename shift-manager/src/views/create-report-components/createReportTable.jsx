@@ -26,11 +26,18 @@ function CreateReportTable(props) {
 	// };
 
 	const footer = (
-		<Button
-			label='Submit report!'
-			className='p-button-success'
-			onClick={handleSubmit}
-		/>
+		<>
+			<Button style={{ marginRight: 10}}
+				label='Submit report!'
+				className='p-button-success'
+				onClick={handleSubmit}
+			/>
+			<Button
+				label='Clear!'
+				className='p-button-danger'
+				onClick={async() => await props.setAlerts([])}
+			/>
+		</>
 	)
 
 	// const actionTemplate = (node, column) => {
@@ -57,18 +64,20 @@ function CreateReportTable(props) {
 						id: id++,
 						alert: alert.title,
 						environment: alert.environment,
+						type: alert.type
 					}
 				})}
 			>
 				<Column field='alert' header='Alert title'></Column>
 				<Column field='environment' header='Environment'></Column>
+				<Column field='type' header='Type'></Column>
 				<Column
 					// body={actionTemplate}
 					style={{ textAlign: 'center', width: '8em' }}
 				/>
 			</DataTable>
 			<Dialog visible={displayDialog} style={{ width: '90vw' }} onHide={() => displayDialogHandler(false)}>
-				{selectedRow && (<EditReportScreen row={selectedRow} displayDialogHandler={displayDialogHandler}/>)}
+				{selectedRow && (<EditReportScreen row={selectedRow} displayDialogHandler={displayDialogHandler} />)}
 			</Dialog>
 		</>
 	)

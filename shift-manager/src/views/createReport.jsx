@@ -6,6 +6,7 @@ import { setAlerts } from '../actions/index'
 import { Toast } from 'primereact/toast';
 
 import CreateReportTable from './create-report-components/createReportTable'
+import { prepareTokenParams } from '@okta/okta-auth-js'
 
 
 const PRODUCTION = 'production'
@@ -43,19 +44,24 @@ function CreateReport(props) {
         inputHandler(initialInput)
     }
 
-    const addAlertHandler = (event) => {
+    const addAlertHandler = (isAlert) => {
+        console.log(isAlert)
         if (input.title === '' || input === initialInput) {
-            alert('Alert must have a title and environment!')
+            alert('You must insert a title and an environemnet!')
             return
         }
 
         else {
             switch (input.environment) {
                 case undefined:
-                    alert('Alert must have an environemnt!')
+                    alert('You must insert an environement!')
                     return
                 default:
-                    props.setAlerts([...props.alertsData, input])
+                    if (isAlert) {
+                        props.setAlerts([...props.alertsData, {...input, type: 'alert'}])
+                    } else {
+                        props.setAlerts([...props.alertsData, {...input, type: 'follow'}])
+                    }
                     idHandler(x => x + 1)
                     break
             }
@@ -90,7 +96,8 @@ function CreateReport(props) {
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
                     </DropdownButton>
-                    <Button onClick={addAlertHandler}>Add</Button>
+                    <Button style={{ marginRight: 30 }} onClick={() => addAlertHandler(true)}>Add Alert</Button>
+                    <Button onClick={() => addAlertHandler(false)}>Add Follow</Button>
                 </Row>
             </Container>
 
