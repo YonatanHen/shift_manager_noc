@@ -35,10 +35,12 @@ router.post('/add-report', async (req,res) => {
             report['staging'] = new Object()
             report['production'] = new Object()
             try {
-            report['staging'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging')
-            report['production'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'production')
+                console.log(report)
+            report['staging'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging' && alert.type==='alert')
+            report['production'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'production' && alert.type==='alert')
+            report['staging'].follows = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging' && alert.type==='follow')
+            report['production'].follows = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'production' && alert.type==='follow')
             } catch (e) { console.log(e) }
-            //TODO: the same for follows
         }
 
         delete report['alerts']
