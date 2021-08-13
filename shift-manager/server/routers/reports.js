@@ -54,13 +54,13 @@ router.post('/add-report', async (req,res) => {
         var nodeoutlook = require('nodejs-nodemailer-outlook')
         nodeoutlook.sendEmail({
         auth: {
-            user: "yehonatanh@accessfintech.com",
-            pass: "*****"
+            user: "set your email",
+            pass: "set your password"
         },
-        from: 'yehonatanh@accessfintech.com',
-        to: 'yehonatanh@accessfintech.com',
-        subject: 'Hey you, awesome!',
-        html: '<b>This is bold text</b>',
+        from: 'set email',
+        to: 'set email',
+        subject: `NOC Shift Report of ${report.reporter}`, 
+        html: '<p>' + JSON.stringify(report) + '</p>', //TODO: Edit the report
         text: 'This is text version!',
         // replyTo: 'receiverXXX@gmail.com',
         // attachments: [
