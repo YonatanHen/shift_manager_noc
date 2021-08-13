@@ -31,7 +31,7 @@ router.post('/add-report', async (req,res) => {
         }
 
         //Adding time to object
-        report['time'] = new Date().toUTCString()
+        report['time'] = new Date().toLocaleString("en-US", {timeZone: "Asia/Jerusalem"})
         if (report['reporter'] === undefined) {
             report['reporter'] = 'NOC'
         } else {
