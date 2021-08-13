@@ -39,7 +39,7 @@ function CreateReportTable(props) {
 			/>
 		</>
 	)
-	
+
 	return (
 		<>
 			<DataTable stripedRows selectionMode="single" onSelectionChange={e => {

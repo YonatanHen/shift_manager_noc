@@ -1,6 +1,9 @@
 const express = require('express')
 const router = new express.Router()
 
+const nodemailer = require('nodemailer')
+const { comment } = require('postcss')
+
 /**
  * HTTP GET req - returns all of the reports in the db
  */
@@ -35,7 +38,6 @@ router.post('/add-report', async (req,res) => {
             report['staging'] = new Object()
             report['production'] = new Object()
             try {
-                console.log(report)
             report['staging'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging' && alert.type==='Alert')
             report['production'].alerts = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'production' && alert.type==='Alert')
             report['staging'].follows = report['alerts'].filter(alert => alert.environment.toLowerCase() === 'staging' && alert.type==='Follow')
@@ -48,6 +50,70 @@ router.post('/add-report', async (req,res) => {
         
         //Save report in db
         await db.collection('reports').insertOne(report)
+
+        var nodeoutlook = require('nodejs-nodemailer-outlook')
+        nodeoutlook.sendEmail({
+        auth: {
+            user: "yehonatanh@accessfintech.com",
+            pass: "*****"
+        },
+        from: 'yehonatanh@accessfintech.com',
+        to: 'yehonatanh@accessfintech.com',
+        subject: 'Hey you, awesome!',
+        html: '<b>This is bold text</b>',
+        text: 'This is text version!',
+        // replyTo: 'receiverXXX@gmail.com',
+        // attachments: [
+        //                 {
+        //                     filename: 'text1.txt',
+        //                     content: 'hello world!'
+        //                 },
+        //                 {   // binary buffer as an attachment
+        //                     filename: 'text2.txt',
+        //                     content: new Buffer('hello world!','utf-8')
+        //                 },
+        //                 {   // file on disk as an attachment
+        //                     filename: 'text3.txt',
+        //                     path: '/path/to/file.txt' // stream this file
+        //                 },
+        //                 {   // filename and content type is derived from path
+        //                     path: '/path/to/file.txt'
+        //                 },
+        //                 {   // stream as an attachment
+        //                     filename: 'text4.txt',
+        //                     content: fs.createReadStream('file.txt')
+        //                 },
+        //                 {   // define custom content type for the attachment
+        //                     filename: 'text.bin',
+        //                     content: 'hello world!',
+        //                     contentType: 'text/plain'
+        //                 },
+        //                 {   // use URL as an attachment
+        //                     filename: 'license.txt',
+        //                     path: 'https://raw.github.com/nodemailer/nodemailer/master/LICENSE'
+        //                 },
+        //                 {   // encoded string as an attachment
+        //                     filename: 'text1.txt',
+        //                     content: 'aGVsbG8gd29ybGQh',
+        //                     encoding: 'base64'
+        //                 },
+        //                 {   // data uri as an attachment
+        //                     path: 'data:text/plain;base64,aGVsbG8gd29ybGQ='
+        //                 },
+        //                 {
+        //                     // use pregenerated MIME node
+        //                     raw: 'Content-Type: text/plain\r\n' +
+        //                          'Content-Disposition: attachment;\r\n' +
+        //                          '\r\n' +
+        //                          'Hello world!'
+        //                 }
+        //             ],
+    onError: (e) => console.log(e),
+    onSuccess: (i) => console.log(i)
+}
+
+
+);
 
         res.send({message: `Report at ${report.timestamp} added successfully`})
     } catch(e) {
