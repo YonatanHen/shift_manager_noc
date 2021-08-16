@@ -4,13 +4,16 @@ import { Column } from 'primereact/column';
 import { connect } from 'react-redux'
 import { Dialog } from 'primereact/dialog';
 import RenderEventsData from './reportWindow'
+import { useEffect } from 'react';
 
 
 const ReportsTable = props => {
     const [selectedRow, selectedRowHandler] = useState(null)
     const [displayDialog, displayDialogHandler] = useState(false)
 
+    useEffect(() => {
 
+    }, [])
 
     return (
         <>

@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Comment from '../../modules/Comment'
 import { setAlerts, updateComments } from '../../actions/index'
+import { useEffect } from 'react';
 
 const alertsCarousel = item => {
     if (item) return (
@@ -17,16 +18,6 @@ const alertsCarousel = item => {
             <p>
                 {item.content}
             </p>
-            {/* {item.comments && item.comments.map((comment, index = 0) => {
-                return (
-                    <>
-                        <b>{`comment #${++index}`}</b>
-                        <p>
-                            {comment.content}
-                        </p>
-                    </>
-                )
-            })} */}
         </>
     )
     else return
