@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import ReportsTable from './reports-components/reportsTable'
-import { getReports } from '../actions/index'
 import { useDispatch } from 'react-redux'
+import { useRef } from 'react'
+
+import { getReports, updateComments } from '../actions/index'
 
 function Reports(props) {
     useEffect(() => {
-         props.getReports()
-    }, [])
+        props.getReports()
+    }, [props.updateComments])
     console.log(props.reportsData)
     return (
         <>
@@ -21,7 +23,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    getReports
+    getReports,
+    updateComments
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reports)
