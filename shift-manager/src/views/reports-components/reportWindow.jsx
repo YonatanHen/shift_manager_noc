@@ -62,6 +62,12 @@ const RenderEventsData = props => {
             commentHandler(event.target.value)
         }
     }
+    const handleCommentSubmit = () => {
+        props.updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))       
+    } 
+
+    // useEffect(() => {}, [props.updateComments])
+
 
     return (
         <>
@@ -82,7 +88,7 @@ const RenderEventsData = props => {
             <InputGroup className="mb-3">
                 <FormControl as="textarea" name="Alert" placeholder="Paste the alert/follow you are commented on here" style={{height: 120}} onChange={handleOnChange}/>
                 <FormControl as="textarea" name="Content" placeholder="Write here the comment" style={{height: 120}} onChange={handleOnChange}/>
-                <Button variant="outline-secondary" id="button-addon2" onClick={updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))}>
+                <Button variant="outline-secondary" id="button-addon2" onClick={handleCommentSubmit}>
                     Submit Comment
                 </Button>
             </InputGroup>

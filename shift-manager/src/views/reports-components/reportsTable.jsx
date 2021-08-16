@@ -11,10 +11,6 @@ const ReportsTable = props => {
     const [selectedRow, selectedRowHandler] = useState(null)
     const [displayDialog, displayDialogHandler] = useState(false)
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <>
             <DataTable paginator rows={10} stripedRows selectionMode="single" onSelectionChange={e => {

@@ -28,9 +28,6 @@ router.post('/add-report', async (req,res) => {
     try {
         if (report.alerts == [] || report.alerts == null)
             reports.alerts.push('Nothing unusual.') 
-        else {
-            
-        }
 
         //Adding time to object
         report['time'] = new Date().toLocaleString("en-US", {timeZone: "Asia/Jerusalem"})
@@ -138,15 +135,10 @@ router.get('/delete-report/:name', async(req,res) => {
 router.put('/add-comment', async(req,res) => {
     try {
         await db.collection('reports').findOneAndUpdate({_id: new ObjectID(req.body.reportId)}, {$push: { comments: req.body.comment }})
-            if (!report.comments) {
-                report.comments = []
-            }
-        console.log(req.body.comment)
-        report.comments.push(req.body.comment)
-        
-        await db.collection
+
+        res.send({message: 'comment added'})
     } catch (e) {
-        res.status(409).send(e)
+        res.status(500).send(e)
     }
 })
 
