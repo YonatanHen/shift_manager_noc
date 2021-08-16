@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Divider } from 'primereact/divider';
 import { Carousel } from 'primereact/carousel'
 import { InputGroup, Button, FormControl } from 'react-bootstrap'
+import { connect, useStore } from 'react-redux'
+import axios from 'axios';
+
+import Comment from '../../modules/Comment'
+import { setAlerts, updateComments } from '../../actions/index'
 
 const alertsCarousel = item => {
     if (item) return (
@@ -34,16 +39,6 @@ const followsCarousel = item => {
             <p>
                 {item.content}
             </p>
-            {/* {item.comments && item.comments.map((comment, index = 0) => {
-                return (
-                    <>
-                        <b>{`comment #${++index}`}</b>
-                        <p>
-                            {comment.content}
-                        </p>
-                    </>
-                )
-            })} */}
         </>
     )
     else return
@@ -64,10 +59,17 @@ const commentsCarousel = item => {
     else return
 }
 
-export const RenderEventsData = props => {
+const RenderEventsData = props => {
+    const [commenatedAlert, commenatedAlertHandler] = useState('') 
+    const [comment, commentHandler] = useState('') 
 
-    const editData = () => {
-
+    const handleOnChange = (event) => {
+        if (event.target.name === 'Alert') {
+            commenatedAlertHandler(event.target.value)
+        }
+        else {
+            commentHandler(event.target.value)
+        }
     }
 
     return (
@@ -87,12 +89,24 @@ export const RenderEventsData = props => {
             <h6>Comments:</h6>
             <Carousel value={props.row.comments} itemTemplate={commentsCarousel} numVisible={1} />
             <InputGroup className="mb-3">
-                <FormControl as="textarea" aria-label="Alert" placeholder="Paste the alert/follow you are commented on here" style={{height: 120}} />
-                <FormControl as="textarea" aria-label="Content" placeholder="Write here the comment" style={{height: 120}} />
-                <Button variant="outline-secondary" id="button-addon2">
+                <FormControl as="textarea" name="Alert" placeholder="Paste the alert/follow you are commented on here" style={{height: 120}} onChange={handleOnChange}/>
+                <FormControl as="textarea" name="Content" placeholder="Write here the comment" style={{height: 120}} onChange={handleOnChange}/>
+                <Button variant="outline-secondary" id="button-addon2" onClick={updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))}>
                     Submit Comment
                 </Button>
             </InputGroup>
         </>
     )
 }
+
+const mapStateToProps = (state) => ({
+    alerts: state.alertsData,
+    user: state.User
+})
+
+const mapDispatchToProps = {
+    updateComments
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RenderEventsData)

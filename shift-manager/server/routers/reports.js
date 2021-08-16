@@ -4,6 +4,8 @@ const router = new express.Router()
 const nodemailer = require('nodemailer')
 const { comment } = require('postcss')
 
+var ObjectID = require('mongodb').ObjectID;
+
 /**
  * HTTP GET req - returns all of the reports in the db
  */
@@ -47,6 +49,8 @@ router.post('/add-report', async (req,res) => {
 
         delete report['alerts']
         delete report['follows']
+
+        report['comments'] = []
         
         //Save report in db
         await db.collection('reports').insertOne(report)
@@ -127,7 +131,22 @@ router.get('/delete-report/:name', async(req,res) => {
 
         res.send({message: `report deleted successfully!`})
     } catch (e) {
-        res.status.send(e)
+        res.status(500).send(e)
+    }
+})
+
+router.put('/add-comment', async(req,res) => {
+    try {
+        await db.collection('reports').findOneAndUpdate({_id: new ObjectID(req.body.reportId)}, {$push: { comments: req.body.comment }})
+            if (!report.comments) {
+                report.comments = []
+            }
+        console.log(req.body.comment)
+        report.comments.push(req.body.comment)
+        
+        await db.collection
+    } catch (e) {
+        res.status(409).send(e)
     }
 })
 

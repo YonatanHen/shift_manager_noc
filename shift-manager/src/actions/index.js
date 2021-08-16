@@ -39,6 +39,16 @@ export const setAlerts = (alerts) => async (dispatch) => {
     })
 }
 
+export const updateComments = (reportId, comment) => async (dispatch) => {
+    axios.put('/add-comment', {reportId, comment}).then((res) => { //comment is Object!
+        dispatch({
+            type:'add_comment'
+        })
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+ 
 export const sendReport = (alerts, reporter) => async (dispatch) => {
     axios.post('/add-report', { alerts, reporter}).then((res) => {
         dispatch({
