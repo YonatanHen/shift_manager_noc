@@ -8,7 +8,6 @@ import { Button } from 'primereact/button'
 import { setAlerts, sendReport } from '../../actions/index'
 import EditReportScreen from './editReport'
 
-
 function CreateReportTable(props) {
 	const [selectedRow, selectedRowHandler] = useState(null)
 	const [displayDialog, displayDialogHandler] = useState(false)

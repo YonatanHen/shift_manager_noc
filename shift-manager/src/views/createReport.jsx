@@ -9,6 +9,8 @@ import CreateReportTable from './create-report-components/createReportTable'
 import { prepareTokenParams } from '@okta/okta-auth-js'
 
 
+import '../css/buttons.css'
+
 const PRODUCTION = 'production'
 const STAGING = 'staging'
 
@@ -93,7 +95,7 @@ function CreateReport(props) {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <DropdownButton id="dropdown-basic-button" title="Environment" style={{ marginRight: 30 }}>
+                    <DropdownButton id="dropdown-basic-button" title="Environment" style={{ marginRight: 30 }} className='create-report-btn'>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
                     </DropdownButton>
@@ -118,6 +120,5 @@ const mapDispatchToProps = {
 const RowStyle = {
     marginBottom: 5
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateReport)

@@ -55,13 +55,55 @@ router.post('/add-report', async (req,res) => {
         var nodeoutlook = require('nodejs-nodemailer-outlook')
         nodeoutlook.sendEmail({
         auth: {
-            user: "set your email",
-            pass: "set your password"
+            user: "set email",
+            pass: "set password"
         },
-        from: 'set email',
-        to: 'set email',
+        from: 'from address',
+        to: 'to address',
         subject: `NOC Shift Report of ${report.reporter}`, 
-        html: '<p>' + JSON.stringify(report) + '</p>', //TODO: Edit the report
+        html: `<h1 style="color:#32998d"> Report by ${report.reporter} at ${report.time} </h1>
+        <h3 style="color:#32998d"> Production: </h3>
+        <h4>
+          alerts:
+        </h4>
+        ${report.production.alerts.map(alert => {
+            return (
+                `<hr>
+                <h5>${alert.title} - ${alert.time}</h5>
+                 ${alert.content}`
+            )
+        })}
+        <h4>
+          follows:
+          ${report.production.follows.map(follow => {
+            return (
+                `<hr>
+                <h5>${follow.title} - ${follow.time}</h5>
+                 ${follow.content}`
+            )
+        })}
+        </h4>
+        <h3 style="color:#32998d"> Staging: </h3>
+        <h4>
+          alerts:
+        </h4>
+        ${report.staging.alerts.map(alert => {
+            return (
+                `<hr>
+                <h5>${alert.title} - ${alert.time}</h5>
+                 ${alert.content}`
+            )
+        })}
+        <h4>
+          follows:
+          ${report.staging.follows.map(follow => {
+            return (
+                `<hr>
+                 <h5>${follow.title} - ${follow.time}</h5>
+                 ${follow.content}`
+            )
+        })}
+        </h4>`, //TODO: Edit the report
         text: 'This is text version!',
         // replyTo: 'receiverXXX@gmail.com',
         // attachments: [
