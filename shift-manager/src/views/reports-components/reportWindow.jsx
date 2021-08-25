@@ -14,9 +14,8 @@ import './css/reportsWindow.css'
 const alertsCarousel = item => {
     if (item) return (
         <>
-            <Divider align="left">
                 <b>{item.title} - {item.time}</b>
-            </Divider>
+
             <p>
                 {item.content}
             </p>
