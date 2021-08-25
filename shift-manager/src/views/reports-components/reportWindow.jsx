@@ -9,6 +9,8 @@ import Comment from '../../modules/Comment'
 import { updateComments, getReports } from '../../actions/index'
 import { useEffect } from 'react';
 
+import './css/reportsWindow.css'
+
 const alertsCarousel = item => {
     if (item) return (
         <>
@@ -76,17 +78,21 @@ const RenderEventsData = props => {
     return (
         <>
             <h3>Report ID: {props.row.id}</h3>
-            <h4>Production:</h4>
-            <h6>Alerts:</h6>
-            <Carousel value={props.row.production.alerts} itemTemplate={alertsCarousel} numVisible={1} />
-            <h6>To Follow:</h6>
-            <Carousel value={props.row.production.follows} itemTemplate={followsCarousel} numVisible={1} />
+            <div className='production-container'>
+                <h4>Production:</h4>
+                <h6>Alerts:</h6>
+                <Carousel value={props.row.production.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                <h6>To Follow:</h6>
+                <Carousel value={props.row.production.follows} itemTemplate={followsCarousel} numVisible={1} />
+            </div>
             {' '}
-            <h4>Staging:</h4>
-            <h6>Alerts:</h6>
-            <Carousel value={props.row.staging.alerts} itemTemplate={alertsCarousel} numVisible={1} />
-            <h6>To Follow:</h6>
-            <Carousel value={props.row.staging.follows} itemTemplate={followsCarousel} numVisible={1} />
+            <div className='staging-container'>
+                <h4>Staging:</h4>
+                <h6>Alerts:</h6>
+                <Carousel value={props.row.staging.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                <h6>To Follow:</h6>
+                <Carousel value={props.row.staging.follows} itemTemplate={followsCarousel} numVisible={1} />
+            </div>
             {submitClicked ? (<>
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>

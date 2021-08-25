@@ -95,7 +95,7 @@ function CreateReport(props) {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    Chosen environemnet
+                    Chosen environement:
                 </Row>
                 <Row style={RowStyle}>
                 <Form.Control type="text" placeholder={input.environment} readOnly />
