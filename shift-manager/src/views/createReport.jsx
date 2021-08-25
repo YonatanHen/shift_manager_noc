@@ -79,7 +79,7 @@ function CreateReport(props) {
         <div>
             <Container style={{ width: '100%' }}>
                 <Row style={RowStyle}>
-                    <Col>Alert:</Col>
+                    Alert:
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
@@ -87,7 +87,7 @@ function CreateReport(props) {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>Alert info:</Col>
+                    Alert info:
                 </Row>
                 <Row style={RowStyle}>
                     <InputGroup>
@@ -95,7 +95,7 @@ function CreateReport(props) {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
-                    <Col>Chosen environemnet:</Col>
+                    Chosen environemnet
                 </Row>
                 <Row style={RowStyle}>
                 <Form.Control type="text" placeholder={input.environment} readOnly />
