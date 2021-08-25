@@ -95,6 +95,12 @@ function CreateReport(props) {
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
+                    <Col>Chosen environemnet:</Col>
+                </Row>
+                <Row style={RowStyle}>
+                <Form.Control type="text" placeholder={input.environment} readOnly />
+                </Row>
+                <Row style={RowStyle}>
                     <DropdownButton id="dropdown-basic-button" title="Environment" style={{ marginRight: 30 }} className='create-report-btn'>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
