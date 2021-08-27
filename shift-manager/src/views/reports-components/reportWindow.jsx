@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Divider } from 'primereact/divider';
 import { Carousel } from 'primereact/carousel'
+import { Dropdown } from 'primereact/dropdown';
 import { InputGroup, Button, FormControl, Spinner } from 'react-bootstrap'
 import { connect, useStore } from 'react-redux'
 
@@ -8,13 +9,14 @@ import { connect, useStore } from 'react-redux'
 import Comment from '../../modules/Comment'
 import { updateComments, getReports } from '../../actions/index'
 import { useEffect } from 'react';
+import concatArrays from '../../functions/concatArrays'
 
 import './css/reportsWindow.css'
 
 const alertsCarousel = item => {
     if (item) return (
         <>
-                <b>{item.title} - {item.time}</b>
+            <b>{item.title} - {item.time}</b>
 
             <p>
                 {item.content}
@@ -76,6 +78,7 @@ const RenderEventsData = props => {
     // }, [props.reportsData])
     return (
         <>
+            {console.log(props.row)}
             <h3>Report ID: {props.row.id}</h3>
             <div className='production-container'>
                 <h4>Production:</h4>
@@ -101,8 +104,10 @@ const RenderEventsData = props => {
                 (<>
                     <h6>Comments:</h6>
                     <Carousel value={props.row.comments} itemTemplate={commentsCarousel} numVisible={1} />
-                    <InputGroup className="mb-3">
-                        <FormControl as="textarea" name="Alert" placeholder="Paste the alert/follow you are commented on here" style={{ height: 120 }} onChange={handleOnChange} />
+                    <InputGroup>
+                        <Dropdown value={commenatedAlert} options={concatArrays(props.row).map(alert => alert.title)} onChange={(e) => commenatedAlertHandler(e.value)} style={{ width: '91%', marginBottom: '0.1%' }} placeholder="Select an alert/follow" />
+                    </InputGroup>
+                    <InputGroup>
                         <FormControl as="textarea" name="Content" placeholder="Write here the comment" style={{ height: 120 }} onChange={handleOnChange} />
                         <Button variant="outline-secondary" id="button-addon2" onClick={handleCommentSubmit}>
                             Submit Comment

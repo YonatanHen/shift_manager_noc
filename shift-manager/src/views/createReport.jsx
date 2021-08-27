@@ -48,7 +48,6 @@ function CreateReport(props) {
     }
 
     const addAlertHandler = (isAlert) => {
-        console.log(isAlert)
         if (input.title === '' || input === initialInput) {
             alert('You must insert a title and an environemnet!')
             return
