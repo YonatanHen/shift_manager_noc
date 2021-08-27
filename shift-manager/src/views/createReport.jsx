@@ -9,7 +9,7 @@ import CreateReportTable from './create-report-components/createReportTable'
 import { prepareTokenParams } from '@okta/okta-auth-js'
 
 
-import '../css/buttons.css'
+import './css/createReports.css'
 
 const PRODUCTION = 'production'
 const STAGING = 'staging'
@@ -100,12 +100,12 @@ function CreateReport(props) {
                 <Form.Control type="text" placeholder={input.environment} readOnly />
                 </Row>
                 <Row style={RowStyle}>
-                    <DropdownButton id="dropdown-basic-button" title="Environment" style={{ marginRight: 30 }} className='create-report-btn'>
+                    <DropdownButton title="Environment" style={{ marginRight: 30 }} variant='info'>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: PRODUCTION })}>Production</Dropdown.Item>
                         <Dropdown.Item onSelect={() => inputHandler({ ...input, environment: STAGING })}>Staging</Dropdown.Item>
                     </DropdownButton>
-                    <Button style={{ marginRight: 30 }} onClick={() => addAlertHandler(true)}>Add Alert</Button>
-                    <Button onClick={() => addAlertHandler(false)}>Add Follow</Button>
+                    <Button style={{ marginRight: 30 }} onClick={() => addAlertHandler(true)} variant='info'>Add Alert</Button>
+                    <Button onClick={() => addAlertHandler(false)} variant='info'>Add Follow</Button>
                 </Row>
             </Container>
 
@@ -125,5 +125,6 @@ const mapDispatchToProps = {
 const RowStyle = {
     marginBottom: 5
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateReport)
