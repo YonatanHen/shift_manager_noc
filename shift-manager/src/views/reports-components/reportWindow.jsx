@@ -21,6 +21,7 @@ const alertsCarousel = item => {
             <p>
                 {item.content}
             </p>
+            {item.calledEmployee && <i>A call was made to <b>{item.calledEmployee}</b></i>}
         </>
     )
     else return
@@ -84,6 +85,7 @@ const RenderEventsData = props => {
                 <h4>Production:</h4>
                 <h6>Alerts:</h6>
                 <Carousel value={props.row.production.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                <hr/>
                 <h6>To Follow:</h6>
                 <Carousel value={props.row.production.follows} itemTemplate={followsCarousel} numVisible={1} />
             </div>
@@ -92,6 +94,7 @@ const RenderEventsData = props => {
                 <h4>Staging:</h4>
                 <h6>Alerts:</h6>
                 <Carousel value={props.row.staging.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                <hr/>
                 <h6>To Follow:</h6>
                 <Carousel value={props.row.staging.follows} itemTemplate={followsCarousel} numVisible={1} />
             </div>

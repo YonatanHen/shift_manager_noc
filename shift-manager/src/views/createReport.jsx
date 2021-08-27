@@ -19,6 +19,7 @@ const initialInput = {
     id: 0,
     title: '',
     content: '',
+    calledEmployee: '',
     time: undefined,
     environment: undefined
 }
@@ -36,6 +37,9 @@ function CreateReport(props) {
     const handleOnChange = (event) => {
         if (event.target.name === 'title') {
             inputHandler({ ...input, title: event.target.value })
+        }
+        else if (event.target.name === 'call') {
+            inputHandler({ ...input, calledEmployee: event.target.value })
         }
         else {
             inputHandler({ ...input, content: event.target.value, time: date })
@@ -91,6 +95,14 @@ function CreateReport(props) {
                 <Row style={RowStyle}>
                     <InputGroup>
                         <Form.Control as="textarea" name="content" style={{ height: 100 }} onChange={handleOnChange} />
+                    </InputGroup>
+                </Row>
+                <Row style={RowStyle}>
+                    In case you made a call, enter the name of the employee you called:
+                </Row>
+                <Row style={RowStyle}>
+                    <InputGroup>
+                        <Form.Control as="textarea" name="call" onChange={handleOnChange} />
                     </InputGroup>
                 </Row>
                 <Row style={RowStyle}>
