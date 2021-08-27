@@ -17,7 +17,6 @@ const alertsCarousel = item => {
     if (item) return (
         <>
             <b>{item.title} - {item.time}</b>
-
             <p>
                 {item.content}
             </p>
@@ -30,7 +29,6 @@ const alertsCarousel = item => {
 const followsCarousel = item => {
     if (item) return (
         <>
-            <Divider align="left" />
             <p>
                 {item.content}
             </p>
