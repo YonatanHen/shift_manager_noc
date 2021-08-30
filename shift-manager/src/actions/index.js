@@ -54,6 +54,7 @@ export const sendReport = (alerts, reporter) => async (dispatch) => {
         dispatch({
             type: 'send_report', 
         })
+        localStorage.clear()
     }).catch((err) => {
         console.log(err)
     })

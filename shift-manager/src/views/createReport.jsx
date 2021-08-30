@@ -28,7 +28,7 @@ const initialInput = {
 function CreateReport(props) {
     const [input, inputHandler] = useState(initialInput)
     const [id, idHandler] = useState(0)
-    const date = new Date().toLocaleString("en-US", {timeZone: "Asia/Jerusalem"})
+    const date = new Date().toLocaleString("en-US", { timeZone: "Asia/Jerusalem" })
 
     useEffect(() => {
         inputHandler({ ...input, id: id, time: date })
@@ -63,16 +63,24 @@ function CreateReport(props) {
                     alert('You must insert an environement!')
                     return
                 default:
+                    let data = undefined
                     if (isAlert) {
-                        props.setAlerts([...props.alertsData, {...input, type: 'Alert'}])
+                        data = { ...input, type: 'Alert' }
+                        props.setAlerts([...props.alertsData, data])
                     } else {
-                        props.setAlerts([...props.alertsData, {...input, type: 'Follow'}])
+                        data = { ...input, type: 'Follow' }
+                        props.setAlerts([...props.alertsData, data])
                     }
                     idHandler(x => x + 1)
+                    // Parse any JSON previously stored in allEntries
+                    var existingEntries = JSON.parse(localStorage.getItem("alerts"));
+                    if (existingEntries == null) existingEntries = [];
+                    existingEntries.push(data);
+                    localStorage.setItem("alerts", JSON.stringify(existingEntries));
+                    console.log(existingEntries)
                     break
             }
         }
-        console.log(props.alertsData)
 
         //Clear on submit
         initiazlizeInput()
@@ -109,7 +117,7 @@ function CreateReport(props) {
                     Chosen environement:
                 </Row>
                 <Row style={RowStyle}>
-                <Form.Control type="text" placeholder={input.environment} readOnly />
+                    <Form.Control type="text" placeholder={input.environment} readOnly />
                 </Row>
                 <Row style={RowStyle}>
                     <DropdownButton title="Environment" style={{ marginRight: 30 }} variant='info'>

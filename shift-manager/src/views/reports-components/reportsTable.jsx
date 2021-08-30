@@ -20,7 +20,7 @@ const ReportsTable = props => {
     useEffect(() => {
         var list = document.getElementsByClassName('p-selectable-row')
         for (let row of list) {
-            console.log(row.getElementsByTagName('td')[0].innerHTML)
+            // console.log(row.getElementsByTagName('td')[0].innerHTML)
             if (row.getElementsByTagName('td')[0].innerHTML === '')
                 row.style.display = 'none'
             else
@@ -73,7 +73,7 @@ const ReportsTable = props => {
 
 const mapStatetoProps = (state) => {
     return {
-        reportsData: state.ReportsData
+
     }
 }
 const mapDispatchToProps = {
