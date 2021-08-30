@@ -26,7 +26,7 @@ function CreateReportTable(props) {
 
 	const footer = (
 		<>
-			<Button style={{ marginRight: 10 }}
+			<Button style={{ marginRight: 10}}
 				label='Submit report!'
 				className='p-button-success'
 				onClick={handleSubmit}
@@ -34,10 +34,7 @@ function CreateReportTable(props) {
 			<Button
 				label='Clear'
 				className='p-button-danger'
-				onClick={async () => {
-					localStorage.clear()
-					await props.setAlerts([])
-				}}
+				onClick={async() => await props.setAlerts([])}
 			/>
 		</>
 	)
@@ -48,8 +45,8 @@ function CreateReportTable(props) {
 				selectedRowHandler(props.alerts.find(alert => e.value.id === alert.id))
 				displayDialogHandler(true)
 			}}
-				footer={JSON.parse(localStorage.getItem("alerts")) != null ? footer : undefined}
-				value={JSON.parse(localStorage.getItem("alerts")) == null ? [] : JSON.parse(localStorage.getItem("alerts")).map((alert) => {
+				footer={props.alerts.length != 0 ? footer : undefined}
+				value={props.alerts.map((alert) => {
 					return {
 						id: id++,
 						alert: alert.title,
