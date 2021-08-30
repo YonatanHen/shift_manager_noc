@@ -71,6 +71,7 @@ function CreateReportTable(props) {
 }
 
 const mapStateToProps = (state) => ({
+	alerts: state.alertsData,
 	user: state.User
 })
 
