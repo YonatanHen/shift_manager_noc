@@ -10,6 +10,14 @@ import "primeicons/primeicons.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { getUsers } from "./actions/index";
 function App(props) {
+  
+  const onUnload = (e) => {
+    e.returnValue = 'Are you sure you want to leave?';
+  };
+  useEffect(() => {
+    window.addEventListener('beforeunload', onUnload);
+  })
+
   return(
   <Router>
     <AppWithRouterAccess/>
