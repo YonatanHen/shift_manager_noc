@@ -1,6 +1,33 @@
 const express = require('express')
 const router = new express.Router()
 
+//Finish this
+router.get('/get-shifts', async (req,res) => {
+    try {
+        const data = await db.collection('shifts').find({}).toArray()
+        
+        res.send(data)
+    } catch (e) {
+        res.send(e)
+    }
+})
+
+router.put('/add-shift', async (req,res) => {
+    const shift = req.body
+
+    try {
+        if (data) {
+            await db.collection.insert({
+                shiftsArray: []
+            })
+        } else {
+            const newData = [...data, shift]
+            await db.collection.update()
+        }
+    } catch (e) {
+        res.send(e)
+    }
+})
 
 /*
 Assumed that put req received the following field: username, start & end of shift (by datetime object).
