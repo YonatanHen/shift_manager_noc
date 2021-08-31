@@ -10,6 +10,7 @@ import { Skeleton } from 'primereact/skeleton';
 import Users from './users'
 import CreateReport from './createReport'
 import Reports from './reports'
+import SalaryStats from './SalaryStats'
 import { Form, Button, Container } from 'react-bootstrap'
 function Home(props) {
     const [comp, setComp] = useState('')
@@ -26,6 +27,9 @@ function Home(props) {
     var usersClick = () => {
         setComp('Users')
     }
+    var salaryStatsClick = () => {
+        setComp('Salary')
+    }
 
     const CompRender = () => {
         switch (comp) {
@@ -33,6 +37,7 @@ function Home(props) {
             case 'Reports': return <Reports />
             case 'CreateReport': return <CreateReport />
             case 'Users': return <Users />
+            case 'Salary': return <SalaryStats />
             default: return <div><Calendar></Calendar></div>
         }
     }
@@ -45,6 +50,7 @@ function Home(props) {
                     <li><Button className="btn btn-light" onClick={reportsClick}>Reports</Button></li>
                     <li><Button className="btn btn-light" onClick={createReportClick}>Create Report</Button></li>
                     <li><Button className="btn btn-light" onClick={usersClick}>Users</Button></li>
+                    <li><Button className="btn btn-light" onClick={salaryStatsClick}>Salary Stats</Button></li>
                 </ul>
             </div>
             <div className="ml-40 h-full w-11/12">
