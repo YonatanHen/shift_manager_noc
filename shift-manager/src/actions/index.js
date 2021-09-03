@@ -58,3 +58,18 @@ export const sendReport = (alerts, reporter) => async (dispatch) => {
         console.log(err)
     })
 }
+
+export const addShift = (user, start, end) => async (dispatch) => {
+    axios.post('/add-shift', {
+        user: user.name,
+        start: start,
+        end: end
+    }).then((res) => {
+        dispatch({
+        type: 'add_shift', 
+    })
+    console.log(res)
+}).catch(err => {
+        console.log(err)
+    })
+}

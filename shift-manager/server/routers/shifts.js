@@ -12,19 +12,14 @@ router.get('/get-shifts', async (req,res) => {
     }
 })
 
-router.put('/add-shift', async (req,res) => {
+router.post('/add-shift', async (req,res) => {
     const shift = req.body
-
+    console.log(shift)
     try {
-        if (data) {
-            await db.collection.insert({
-                shiftsArray: []
-            })
-        } else {
-            const newData = [...data, shift]
-            await db.collection.update()
-        }
-    } catch (e) {
+         await db.collection('shifts').insertOne(shift)
+
+         res.send({message: 'shift added'})
+        } catch (e) {
         res.send(e)
     }
 })

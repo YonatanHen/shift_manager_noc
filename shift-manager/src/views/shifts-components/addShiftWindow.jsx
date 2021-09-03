@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { InputGroup, Button, FormControl, Spinner, Row, Col, Container, Form } from 'react-bootstrap'
 import { connect, useStore } from 'react-redux'
 
+import { addShift } from '../../actions/index'
+
 
 const AddShiftWindow = props => {
 
@@ -12,12 +14,11 @@ const AddShiftWindow = props => {
         else { //end
             props.inputHandler({ ...props.input, end: event.target.value})
         }
-        
-        console.log(event.target.name, event.target.value)
     }
 
-    const handleAddShift = event => {
-
+    const handleAddShift = async (event) => {
+        console.log('err')
+       await props.addShift(props.user, props.input.start, props.input.end)
     }
 
 
@@ -59,10 +60,11 @@ const AddShiftWindow = props => {
 }
 
 const mapStateToProps = (state) => ({
+    user: state.User
 })
 
 const mapDispatchToProps = {
-
+    addShift
 }
 
 const RowStyle = {
