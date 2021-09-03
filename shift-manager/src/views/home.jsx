@@ -5,7 +5,7 @@ import noclogo from '../assets/noclogo.png'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { setUser } from '../actions/index'
-import { Calendar } from './calendar'
+import { Shifts } from './shifts'
 import { Skeleton } from 'primereact/skeleton';
 import Users from './users'
 import CreateReport from './createReport'
@@ -33,12 +33,12 @@ function Home(props) {
 
     const CompRender = () => {
         switch (comp) {
-            case 'Shifts': return <Calendar />
+            case 'Shifts': return <Shifts />
             case 'Reports': return <Reports />
             case 'CreateReport': return <CreateReport />
             case 'Users': return <Users />
             case 'Salary': return <SalaryStats />
-            default: return <div><Calendar></Calendar></div>
+            default: return <div><Shifts /></div>
         }
     }
     return (
