@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { Skeleton } from 'primereact/skeleton';
 import { Calendar } from './shifts-components/calendar'
 
-// import { getShifts } from '../actions/index' 
+const Shifts = (props) => {
+    console.log(props.shifts)
 
-export const Shifts = (props) => {
-    const calendar = <Calendar shiftsData={props.shiftsData}/>
-
+    const calendar = <Calendar shiftsData={props.shifts}/>
     return (
         <div>
             <div className="m-5">
@@ -18,11 +17,11 @@ export const Shifts = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    shiftsData: state.Shifts
+    shifts: state.Shifts
 })
 
 const mapDispatchToProps = {
-    
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shifts)

@@ -32,6 +32,17 @@ export const getReports = () => async (dispatch) => {
     })
 }
 
+export const getShifts = () => async (dispatch) => {
+    axios.get('/get-shifts').then((res) => {
+        dispatch({
+            type: 'get_shifts',
+            shifts: res.data
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
 export const setAlerts = (alerts) => async (dispatch) => {
     await dispatch({
         type: 'set_alerts',
@@ -68,20 +79,9 @@ export const addShift = (user, start, end) => async (dispatch) => {
         dispatch({
         type: 'add_shift', 
     })
-    console.log(res)
 }).catch(err => {
         console.log(err)
     })
 }
 
-export const getShifts = () => async (dispatch) => {
-    axios.get('/get-shifts').then((res) => {
-        console.log(res);
-        dispatch({
-            type: 'get_shifts',
-            shifts: res.data
-        })
-    }).catch((err) => {
-        console.log(err);
-    })
-}
+

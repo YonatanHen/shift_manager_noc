@@ -5,8 +5,8 @@ import noclogo from '../assets/noclogo.png'
 import { connect } from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { setUser } from '../actions/index'
-import { Shifts } from './shifts'
 import { Skeleton } from 'primereact/skeleton';
+import Shifts from './shifts'
 import Users from './users'
 import CreateReport from './createReport'
 import Reports from './reports'
