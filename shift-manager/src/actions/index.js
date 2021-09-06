@@ -73,3 +73,15 @@ export const addShift = (user, start, end) => async (dispatch) => {
         console.log(err)
     })
 }
+
+export const getShifts = () => async (dispatch) => {
+    axios.get('/get-shifts').then((res) => {
+        console.log(res);
+        dispatch({
+            type: 'get_shifts',
+            shifts: res.data
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+}

@@ -8,7 +8,6 @@ import { Dialog } from 'primereact/dialog';
 
 import AddShiftWindow from './addShiftWindow'
 
-import axios from 'axios'
 import { useEffect } from 'react';
 
 
@@ -21,7 +20,7 @@ export const Calendar = props => {
     })
 
     useEffect(() => {
-        
+        console.log(props.shiftsData)
     }, [inputHandler])
 
     const data =
