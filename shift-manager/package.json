@@ -44,7 +44,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"npm run start\" \"nodemon server/app.js\""
+    "dev": "concurrently \"npm run start\" \"nodemon server/app.js\"",
+    "server": "server/app.js"
   },
   "eslintConfig": {
     "extends": "react-app"

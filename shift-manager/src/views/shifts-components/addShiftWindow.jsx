@@ -8,7 +8,7 @@ import { addShift } from '../../actions/index'
 const AddShiftWindow = props => {
 
     const handleOnChange = (event) => {
-        if (event.target.name == 'start date') {
+        if (event.target.name === 'start date') {
             props.inputHandler({ ...props.input, start: event.target.value})
         }
         else { //end

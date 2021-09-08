@@ -11,7 +11,6 @@ export const setUser = (user) => async (dispatch) => {
 }
 export const getUsers = () => async (dispatch) => {
     axios.get('/getusers').then((res) => {
-        console.log(res);
         dispatch({
             type: 'get_users',
             list: res.data
@@ -72,7 +71,7 @@ export const sendReport = (alerts, reporter) => async (dispatch) => {
 
 export const addShift = (user, start, end) => async (dispatch) => {
     axios.post('/add-shift', {
-        user: user.name,
+        title: user.name,
         start: start,
         end: end
     }).then((res) => {

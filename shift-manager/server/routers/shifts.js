@@ -5,7 +5,6 @@ const router = new express.Router()
 router.get('/get-shifts', async (req,res) => {
     try {
         const data = await db.collection('shifts').find({}).toArray()
-        
         res.send(data)
     } catch (e) {
         res.send(e)

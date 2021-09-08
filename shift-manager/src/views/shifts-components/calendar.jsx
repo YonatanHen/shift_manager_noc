@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
+import { connect } from 'react-redux'
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
@@ -8,23 +9,20 @@ import { Dialog } from 'primereact/dialog'
 
 import AddShiftWindow from './addShiftWindow'
 
-import { useEffect } from 'react'
+import { getShifts } from '../../actions/index';
 
-export const Calendar = (props) => {
+const Calendar = (props) => {
 	const [displayDialog, displayDialogHandler] = useState(false)
 	const [input, inputHandler] = useState({
-		id: 3,
 		start: '',
 		end: '',
 	})
 
-	useEffect(() => {}, [inputHandler])
+	useEffect(async () => {
+        await props.getShifts()
+        console.log(props.shifts)
+    }, [inputHandler, input])
 
-	const data = [
-		{ id: 1, title: 'All Day Event', start: '2021-09-01' },
-		{ id: 2, title: 'Long Event', start: '2021-09-07', end: '2021-09-10' },
-		...props.shiftsData,
-	]
 	const handleDateClick = (arg) => {
 		inputHandler({ ...input, start: arg.dateStr + 'T00:00' })
 		displayDialogHandler(true)
@@ -33,7 +31,7 @@ export const Calendar = (props) => {
 	return (
 		<>
 			<FullCalendar
-				events={data}
+				events={props.shifts}
 				initialView='dayGridMonth'
 				plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
 				headerToolbar={{
@@ -57,6 +55,13 @@ export const Calendar = (props) => {
 	)
 }
 
-export const getEvents = () => {
-	return <></>
+const mapStateToProps = (state) => ({
+    shifts: state.Shifts
+})
+
+const mapDispatchToProps = {
+    getShifts,
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
+
