@@ -83,4 +83,13 @@ export const addShift = (user, start, end) => async (dispatch) => {
     })
 }
 
+export const deleteShift = (id) => async (dispatch) => {
+    axios.delete(`/delete-shift/${id}`).then((res) => {
+        dispatch({
+            type: 'delete_shift'
+        })
+    }).catch(err => {
+        console.log(err)
+    })
+}
 

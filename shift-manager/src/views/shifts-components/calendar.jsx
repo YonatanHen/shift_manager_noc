@@ -44,6 +44,7 @@ const Calendar = (props) => {
 				selectMirror
 				dayMaxEvents
 				dateClick={handleDateClick}
+                eventClick={info=>{console.log(info.event.extendedProps._id)}}
 			/>
 			<Dialog
 				visible={displayDialog}

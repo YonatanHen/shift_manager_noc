@@ -1,6 +1,8 @@
 const express = require('express')
 const router = new express.Router()
 
+var ObjectID = require('mongodb').ObjectID;
+
 //Finish this
 router.get('/get-shifts', async (req,res) => {
     try {
@@ -18,6 +20,17 @@ router.post('/add-shift', async (req,res) => {
          await db.collection('shifts').insertOne(shift)
 
          res.send({message: 'shift added'})
+        } catch (e) {
+        res.send(e)
+    }
+})
+
+router.delete('/delete-shift/:id', async (req,res) => {
+    const id = req.params.id 
+    try {
+        await db.collection('shifts').deleteOne({"_id": ObjectID(id)})
+        res.send({message: 'shift deleted successfully'})
+        
         } catch (e) {
         res.send(e)
     }
