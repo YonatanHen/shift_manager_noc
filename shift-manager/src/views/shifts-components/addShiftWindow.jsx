@@ -9,16 +9,18 @@ const AddShiftWindow = props => {
 
     const handleOnChange = (event) => {
         if (event.target.name === 'start date') {
-            props.inputHandler({ ...props.input, start: event.target.value})
+            props.inputHandler({ ...props.input, start: event.target.value })
         }
         else { //end
-            props.inputHandler({ ...props.input, end: event.target.value})
+            props.inputHandler({ ...props.input, end: event.target.value })
         }
     }
 
-    const handleAddShift = async (event) => {
-        console.log('err')
-       await props.addShift(props.user, props.input.start, props.input.end)
+    const handleAddShift = () => {
+        props.setIsLoading(true)
+        props.addShift(props.user, props.input.start, props.input.end)
+        props.displayDialogHandler(false)
+        props.setIsLoading(false)
     }
 
 
@@ -37,7 +39,7 @@ const AddShiftWindow = props => {
                 </Row>
 
                 <Row style={RowStyle}>
-                <Col>End Date {'&'} Hour:</Col>
+                    <Col>End Date {'&'} Hour:</Col>
                 </Row>
                 <Row style={RowStyle}>
                     <Col>

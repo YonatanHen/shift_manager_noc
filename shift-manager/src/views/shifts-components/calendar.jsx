@@ -17,10 +17,11 @@ const Calendar = (props) => {
         start: '',
         end: '',
     })
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(async () => {
         await props.getShifts()
-    }, [inputHandler, input, props.deleteShift, props.getShifts])
+    }, [inputHandler, input, props.deleteShift, props.getShifts, props.shifts, FullCalendar])
 
     const handleDateClick = (arg) => {
         inputHandler({ ...input, start: arg.dateStr + 'T00:00' })
@@ -29,7 +30,7 @@ const Calendar = (props) => {
 
     return (
         <>
-            <FullCalendar
+            {!isLoading ? (<FullCalendar
                 events={props.shifts}
                 initialView='dayGridMonth'
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -45,15 +46,17 @@ const Calendar = (props) => {
                 dateClick={handleDateClick}
                 eventClick={info => {
                     if (window.confirm("Are you sure that you want to delete this shift?")) {
+                        setIsLoading(true)
                         props.deleteShift(info.event.extendedProps._id)
-                      }
+                        setIsLoading(false)
+                    }
                 }}
-            />
+            />) : (<h1>loading...</h1>)}
             <Dialog
                 visible={displayDialog}
                 onHide={() => displayDialogHandler(false)}
             >
-                <AddShiftWindow input={input} inputHandler={inputHandler} />
+                <AddShiftWindow input={input} inputHandler={inputHandler} displayDialogHandler={displayDialogHandler} setIsLoading={setIsLoading} />
             </Dialog>
         </>
     )
