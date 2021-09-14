@@ -65,19 +65,19 @@ const RenderEventsData = props => {
             commentHandler(event.target.value)
         }
     }
-    const handleCommentSubmit = async () => {
+    const handleCommentSubmit = () => {
         submitClickedHandler(true)
-        await props.updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))
-        await props.getReports()
+        props.updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))
+        props.getReports()
         submitClickedHandler(false)
     }
 
-    // useEffect(() => {
+    useEffect(() => {
+        console.log('a')
+    }, [submitClickedHandler, submitClicked, Spinner])
 
-    // }, [props.reportsData])
     return (
         <>
-            {console.log(props.row)}
             <h3>Report ID: {props.row.id}</h3>
             <div className='production-container'>
                 <h4>Production:</h4>

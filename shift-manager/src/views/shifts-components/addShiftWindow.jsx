@@ -18,45 +18,48 @@ const AddShiftWindow = props => {
 
     const handleAddShift = () => {
         props.setIsLoading(true)
-        props.addShift(props.user, props.input.start, props.input.end)
-        props.displayDialogHandler(false)
+        if (props.input.start != '' && props.input.end != '') {
+            props.addShift(props.user, props.input.start, props.input.end)
+            props.displayDialogHandler(false)
+        }
         props.setIsLoading(false)
     }
 
 
     return (
         <>
-            <Container style={{ width: '100%' }}>
-                <Row style={RowStyle}>
-                    <Col>Start Date {'&'} Hour:</Col>
-                </Row>
-                <Row style={RowStyle}>
-                    <Col>
-                        <InputGroup className="mb-3">
-                            <Form.Control type='datetime-local' value={props.input.start} name="start date" onChange={handleOnChange} />
-                        </InputGroup>
-                    </Col>
-                </Row>
+            <form action="submit">
+                <Container style={{ width: '100%' }}>
+                    <Row style={RowStyle}>
+                        <Col>Start Date {'&'} Hour:</Col>
+                    </Row>
+                    <Row style={RowStyle}>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <Form.Control type='datetime-local' value={props.input.start} name="start date" onChange={handleOnChange} required />
+                            </InputGroup>
+                        </Col>
+                    </Row>
 
-                <Row style={RowStyle}>
-                    <Col>End Date {'&'} Hour:</Col>
-                </Row>
-                <Row style={RowStyle}>
-                    <Col>
-                        <InputGroup className="mb-3">
-                            <Form.Control type='datetime-local' name="end date" onChange={handleOnChange} />
-                        </InputGroup>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Button variant="outline-secondary" id="button-addon2" onClick={handleAddShift}>
-                            Add shift
-                        </Button>
-                    </Col>
-                </Row>
-            </Container>
-
+                    <Row style={RowStyle}>
+                        <Col>End Date {'&'} Hour:</Col>
+                    </Row>
+                    <Row style={RowStyle}>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <Form.Control type='datetime-local' name="end date" onChange={handleOnChange} required />
+                            </InputGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Button variant="outline-secondary" id="button-addon2" onClick={handleAddShift} type="submit">
+                                Add shift
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </form>
         </>
     )
 }
