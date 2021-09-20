@@ -29,6 +29,7 @@ const mapStatetoProps = (state) => {
     User: state.User,
   };
 };
+
 const mapDispatchToProps = {
   getUsers,
 };
