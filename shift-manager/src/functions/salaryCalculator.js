@@ -7,18 +7,21 @@ export default async(uname, hourlySalary = 45) => {
     await axios.get(`/get-user-shifts/${uname}`)
     .then(res => {
         data = res.data
+        console.log(data)
     })
     .catch(err => {
         console.log(err)
     })
 
-    console.log(data)
+    const currentMonth = new Date().getMonth()
+    data = data.filter(item => (new Date(item.end).getMonth() === currentMonth && new Date(item.end).getDay() < 24 && new Date(item.end).getDay() >= 1)
+                    || (new Date(item.end).getMonth() === currentMonth - 1 && new Date(item.end).getDay() >= 25))
     for(let i = 0 ; i < data.length ; i++) {
-        totalHours += Math.abs(data[i].end.getTime() - data[i].start.getTime()) / 3600000
+        totalHours += Math.abs(Date.parse(data[i].end) - Date.parse(data[i].start)) / 3600000
         salary += shiftSalary(data[i].start, data[i].end, hourlySalary)
     }
 
-    console.log(salary)
+    return {totalHours, salary}
 } 
 
 const shiftSalary = (dateOne, dateTwo, hourlySalary) => {

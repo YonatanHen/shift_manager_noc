@@ -39,7 +39,7 @@ router.delete('/delete-shift/:id', async (req,res) => {
 router.get('/get-user-shifts/:uname', async (req,res) => {
     try {
         const data = await db.collection('shifts').find({title: req.params.uname}).toArray()
-        res.send(data)
+        await res.send(data)
     } catch (e) {
         res.send(e)
     }

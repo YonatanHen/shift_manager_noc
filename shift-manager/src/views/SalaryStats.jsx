@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { FormControl } from 'react-bootstrap'
+import { Container, FormControl } from 'react-bootstrap'
 import HoursCalc from '../functions/salaryCalculator'
 
 
 const Stats = props => {
     const [salaryInput, SalaryInputHandler] = useState(0)
-    useEffect(() => {
-        HoursCalc(props.user.name)
-    }, [])
+    const [data, dataHandler] = useState({})
 
-    const handleOnChangeSalaryInput = async(event) => {
-        
+    useEffect(async() => {
+        await dataHandler(await HoursCalc(props.user.name, salaryInput))
+    }, [salaryInput])
+
+    const handleOnChangeSalaryInput = async (event) => {
+
         const val = event.target.value ? await parseInt(event.target.value) : 0
         await SalaryInputHandler(val)
     }
 
     return (
         <>
-            <h2>Enter your hourly salary:</h2>
-            <FormControl
-                value={salaryInput} 
-                onChange={handleOnChangeSalaryInput}
-            />
-            
+            <Container>
+                <h5>Enter your hourly salary:</h5>
+                <FormControl
+                    value={salaryInput}
+                    onChange={handleOnChangeSalaryInput}
+                    style={{ width: '30%', marginBottom: '1%', marginTop: '1%'}}
+                />
+                <h5>Total Hours: {data.totalHours}</h5> 
+                <h5>Current Salary: {data.salary}</h5>
+            </Container>
         </>
     )
 }
