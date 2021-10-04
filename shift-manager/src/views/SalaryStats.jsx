@@ -10,6 +10,7 @@ const Stats = props => {
 
     useEffect(async() => {
         await dataHandler(await HoursCalc(props.user.name, salaryInput))
+        console.log(data)
     }, [salaryInput])
 
     const handleOnChangeSalaryInput = async (event) => {

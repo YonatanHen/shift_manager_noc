@@ -33,6 +33,8 @@ export const getReports = () => async (dispatch) => {
 
 export const getShifts = () => async (dispatch) => {
     axios.get('/get-shifts').then((res) => {
+        console.log('new data');
+        console.log(res.data);
         dispatch({
             type: 'get_shifts',
             shifts: res.data
@@ -41,7 +43,6 @@ export const getShifts = () => async (dispatch) => {
         console.log(err);
     })
 }
-
 export const setAlerts = (alerts) => async (dispatch) => {
     await dispatch({
         type: 'set_alerts',
@@ -75,9 +76,17 @@ export const addShift = (user, start, end) => async (dispatch) => {
         start: start,
         end: end
     }).then((res) => {
-        dispatch({
-        type: 'add_shift', 
-    })
+        axios.get('/get-shifts').then((res) => {
+            console.log('new data');
+            console.log(res.data);
+            dispatch({
+                type: 'get_shifts',
+                shifts: res.data
+            })
+        }).catch((err) => {
+            console.log(err);
+        })
+        
 }).catch(err => {
         console.log(err)
     })
@@ -85,11 +94,31 @@ export const addShift = (user, start, end) => async (dispatch) => {
 
 export const deleteShift = (id) => async (dispatch) => {
     axios.delete(`/delete-shift/${id}`).then((res) => {
-        dispatch({
-            type: 'delete_shift'
+        axios.get('/get-shifts').then((res) => {
+            console.log('new data');
+            console.log(res.data);
+            dispatch({
+                type: 'get_shifts',
+                shifts: res.data
+            })
+        }).catch((err) => {
+            console.log(err);
         })
     }).catch(err => {
         console.log(err)
     })
 }
-
+export const updateShift = (data) => async (dispatch) => {
+    axios.post('/update-shift', data).then((res) => {
+        axios.get('/get-shifts').then((res) => {
+            dispatch({
+                type: 'get_shifts',
+                shifts: res.data
+            })
+        }).catch((err) => {
+            console.log(err);
+        })
+    }).catch(err => {
+        console.log(err)
+    })
+}
