@@ -9,7 +9,7 @@ const Stats = props => {
     const [data, dataHandler] = useState({})
 
     useEffect(async () => {
-        await dataHandler(await HoursCalc(props.user.name, salaryInput))
+        await dataHandler(await HoursCalc(sessionStorage.getItem('name'), salaryInput))
         console.log(data.hoursCounter)
     }, [salaryInput])
 

@@ -72,7 +72,7 @@ export const sendReport = (alerts, reporter) => async (dispatch) => {
 
 export const addShift = (user, start, end) => async (dispatch) => {
     axios.post('/add-shift', {
-        title: user.name,
+        title: sessionStorage.getItem('name'),
         start: start,
         end: end
     }).then((res) => {
