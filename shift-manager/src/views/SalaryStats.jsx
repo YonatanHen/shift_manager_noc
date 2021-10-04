@@ -8,9 +8,9 @@ const Stats = props => {
     const [salaryInput, SalaryInputHandler] = useState(0)
     const [data, dataHandler] = useState({})
 
-    useEffect(async() => {
+    useEffect(async () => {
         await dataHandler(await HoursCalc(props.user.name, salaryInput))
-        console.log(data)
+        console.log(data.hoursCounter)
     }, [salaryInput])
 
     const handleOnChangeSalaryInput = async (event) => {
@@ -26,10 +26,20 @@ const Stats = props => {
                 <FormControl
                     value={salaryInput}
                     onChange={handleOnChangeSalaryInput}
-                    style={{ width: '30%', marginBottom: '1%', marginTop: '1%'}}
+                    style={{ width: '30%', marginBottom: '1%', marginTop: '1%' }}
                 />
-                <h5>Total Hours: {data.totalHours}</h5> 
-                <h5>Current Salary: {data.salary}</h5>
+                {data.hoursCounter ? (
+                    <div>
+                        <h5>Total Hours: {data.totalHours}</h5>
+                        <h5>Current Salary: {data.salary}</h5>
+                        <h5>Morning hours: {data.hoursCounter.morning}</h5>
+                        <h5>Noon hours: {data.hoursCounter.noon}</h5>
+                        <h5>night hours: {data.hoursCounter.night}</h5>
+                        <h5>Friday morning hours: {data.hoursCounter.fridayMorning}</h5>
+                        <h5>Friday noon hours: {data.hoursCounter.fridayNoon}</h5>
+                    </div>) :
+                    (<h5>Loading...</h5>)}
+
             </Container>
         </>
     )

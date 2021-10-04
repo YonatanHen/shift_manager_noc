@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async(uname, hourlySalary = 45) => {
     let data
-    let hoursCounter = { morningOrNoon: 0, noon: 0, night: 0, fridayMorning: 0, fridayNoon: 0 }
+    let hoursCounter = { morning: 0, noon: 0, night: 0, fridayMorning: 0, fridayNoon: 0 }
     let salary = 0
     let totalHours = 0
     await axios.get(`/get-user-shifts/${uname}`)
