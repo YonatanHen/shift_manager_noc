@@ -20,7 +20,7 @@ const Home = (props) => {
       console.log(info);
       props.setUser(info);
       sessionStorage.setItem('email',info.email)
-      sessionStorage.setItem('name',info.name)
+      localStorage.setItem('name',info.name)
     });
   }
   const button = authState.isAuthenticated ?
