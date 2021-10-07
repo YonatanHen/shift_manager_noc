@@ -8,7 +8,6 @@ import ReactToPdf from 'react-to-pdf'
 const Stats = props => {
     const [salaryInput, SalaryInputHandler] = useState(0)
     const [data, dataHandler] = useState({})
-    const [chartData, chartDataHandler] = useState({})
     const [isClicked, setIsClicked] = useState(false)
 
     const ref = React.createRef()
@@ -20,28 +19,6 @@ const Stats = props => {
 
     useEffect(async () => {
         await dataHandler(await HoursCalc(sessionStorage.getItem('name'), salaryInput))
-        if (data.hoursCounter) {
-            chartDataHandler({
-                labels: ['100%', '125%', '150%'],
-                datasets: [
-                    {
-                        data: [data.hoursCounter.morning + data.hoursCounter.noon,
-                        data.hoursCounter.fridayMorning,
-                        data.hoursCounter.night + data.hoursCounter.fridayNoon],
-                        backgroundColor: [
-                            "#42A5F5",
-                            "#66BB6A",
-                            "#FFA726"
-                        ],
-                        hoverBackgroundColor: [
-                            "#64B5F6",
-                            "#81C784",
-                            "#FFB74D"
-                        ]
-                    }
-                ]
-            })
-        }
     }, [salaryInput])
 
     const handleOnChangeSalaryInput = async (event) => {
