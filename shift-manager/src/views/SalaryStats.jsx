@@ -1,16 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Container, FormControl } from 'react-bootstrap'
+import { Button, Container, FormControl } from 'react-bootstrap'
 import HoursCalc from '../functions/salaryCalculator'
+import ReactToPdf from 'react-to-pdf'
 
 
 const Stats = props => {
     const [salaryInput, SalaryInputHandler] = useState(0)
     const [data, dataHandler] = useState({})
+    const [chartData, chartDataHandler] = useState({})
+    const [isClicked, setIsClicked] = useState(false)
+
+    const ref = React.createRef()
+
+    const clickHandler = () => {
+        setIsClicked(true)
+        setTimeout(() => setIsClicked(false), 2000)
+    }
 
     useEffect(async () => {
         await dataHandler(await HoursCalc(sessionStorage.getItem('name'), salaryInput))
-        console.log(data.hoursCounter)
+        if (data.hoursCounter) {
+            chartDataHandler({
+                labels: ['100%', '125%', '150%'],
+                datasets: [
+                    {
+                        data: [data.hoursCounter.morning + data.hoursCounter.noon,
+                        data.hoursCounter.fridayMorning,
+                        data.hoursCounter.night + data.hoursCounter.fridayNoon],
+                        backgroundColor: [
+                            "#42A5F5",
+                            "#66BB6A",
+                            "#FFA726"
+                        ],
+                        hoverBackgroundColor: [
+                            "#64B5F6",
+                            "#81C784",
+                            "#FFB74D"
+                        ]
+                    }
+                ]
+            })
+        }
     }, [salaryInput])
 
     const handleOnChangeSalaryInput = async (event) => {
@@ -29,17 +60,28 @@ const Stats = props => {
                     style={{ width: '30%', marginBottom: '1%', marginTop: '1%' }}
                 />
                 {data.hoursCounter ? (
-                    <div>
-                        <h5>Total Hours: {data.totalHours}</h5>
-                        <h5>Current Salary: {data.salary}</h5>
-                        <h5>Morning hours: {data.hoursCounter.morning}</h5>
-                        <h5>Noon hours: {data.hoursCounter.noon}</h5>
-                        <h5>night hours: {data.hoursCounter.night}</h5>
-                        <h5>Friday morning hours: {data.hoursCounter.fridayMorning}</h5>
-                        <h5>Friday noon hours: {data.hoursCounter.fridayNoon}</h5>
+                    <div style={{ border: '2px solid black', width: '30%'}}>
+                        <div style={{ marginLeft: '1%'}}>
+                            <h5>Current Salary: {data.salary}</h5>
+                            <div ref={ref}>
+                                {isClicked && <h2>{props.user.name + ' report'}</h2>}
+                                <h5>Total Hours: {data.totalHours}</h5>
+                                <h5>Morning hours: {data.hoursCounter.morning}</h5>
+                                <h5>Noon hours: {data.hoursCounter.noon}</h5>
+                                <h5>night hours: {data.hoursCounter.night}</h5>
+                                <h5>Friday morning hours: {data.hoursCounter.fridayMorning}</h5>
+                                <h5>Friday noon hours: {data.hoursCounter.fridayNoon}</h5>
+                            </div>
+                        </div>
                     </div>) :
                     (<h5>Loading...</h5>)}
-
+                <div style={{ marginTop: 10 }}>
+                    <ReactToPdf targetRef={ref} filename={`${props.user.name} report.pdf`} x={.5} y={.5} scale={0.8}>
+                        {({ toPdf }) => (
+                            <Button onClick={() => {toPdf(); clickHandler();}}>Generate Report to PDF</Button>
+                        )}
+                    </ReactToPdf>
+                </div>
             </Container>
         </>
     )

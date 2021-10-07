@@ -15,9 +15,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.16.13",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
+    "chart.js": "^3.5.1",
     "concurrently": "^6.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -37,7 +39,12 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "require": "^2.4.20"
+    "react-to-pdf": "0.0.14",
+    "react-ui": "^1.0.0-beta.32",
+    "react-ui-stats": "0.0.2",
+    "require": "^2.4.20",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4"
   },
   "scripts": {
     "start": "craco start",
