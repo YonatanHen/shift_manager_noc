@@ -67,7 +67,7 @@ const RenderEventsData = props => {
     }
     const handleCommentSubmit = () => {
         submitClickedHandler(true)
-        props.updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : 'NOC'))
+        props.updateComments(props.row.id, new Comment(commenatedAlert, comment, !!props.user ? props.user.name : localStorage.getItem('name')))
         props.getReports()
         submitClickedHandler(false)
     }

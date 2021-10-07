@@ -41,7 +41,7 @@ const Stats = props => {
                         <div style={{ marginLeft: '1%'}}>
                             <h5>Current Salary: {data.salary}</h5>
                             <div ref={ref}>
-                                {isClicked && <h2>{props.user.name + ' report ' + new Date().toLocaleString()}</h2>}
+                                {isClicked && <h2>{sessionStorage.getItem('name') + ' report ' + new Date().toLocaleString()}</h2>}
                                 <h5>Total Hours: {data.totalHours}</h5>
                                 <h5>Morning hours: {data.hoursCounter.morning}</h5>
                                 <h5>Noon hours: {data.hoursCounter.noon}</h5>
@@ -53,7 +53,7 @@ const Stats = props => {
                     </div>) :
                     (<h5>Loading...</h5>)}
                 <div style={{ marginTop: 10 }}>
-                    <ReactToPdf targetRef={ref} filename={`${props.user.name} report.pdf`} x={.5} y={.5} scale={0.8}>
+                    <ReactToPdf targetRef={ref} filename={`${sessionStorage.getItem('name')} report.pdf`} x={.5} y={.5} scale={0.8}>
                         {({ toPdf }) => (
                             <Button onClick={() => {toPdf(); clickHandler();}} variant="info">Generate Report to PDF</Button>
                         )}
