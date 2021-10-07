@@ -6,7 +6,6 @@ import { setAlerts } from '../actions/index'
 import { Toast } from 'primereact/toast';
 
 import CreateReportTable from './create-report-components/createReportTable'
-import { prepareTokenParams } from '@okta/okta-auth-js'
 
 
 import './css/createReports.css'

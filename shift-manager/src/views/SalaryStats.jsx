@@ -55,7 +55,7 @@ const Stats = props => {
                 <div style={{ marginTop: 10 }}>
                     <ReactToPdf targetRef={ref} filename={`${props.user.name} report.pdf`} x={.5} y={.5} scale={0.8}>
                         {({ toPdf }) => (
-                            <Button onClick={() => {toPdf(); clickHandler();}}>Generate Report to PDF</Button>
+                            <Button onClick={() => {toPdf(); clickHandler();}} variant="info">Generate Report to PDF</Button>
                         )}
                     </ReactToPdf>
                 </div>
