@@ -37,11 +37,11 @@ const Stats = props => {
                     style={{ width: '30%', marginBottom: '1%', marginTop: '1%' }}
                 />
                 {data.hoursCounter ? (
-                    <div style={{ border: '2px solid black', width: '30%'}}>
+                    <div style={{ border: '2px solid black', width: '40%'}}>
                         <div style={{ marginLeft: '1%'}}>
                             <h5>Current Salary: {data.salary}</h5>
                             <div ref={ref}>
-                                {isClicked && <h2>{props.user.name + ' report'}</h2>}
+                                {isClicked && <h2>{props.user.name + ' report ' + new Date().toLocaleString()}</h2>}
                                 <h5>Total Hours: {data.totalHours}</h5>
                                 <h5>Morning hours: {data.hoursCounter.morning}</h5>
                                 <h5>Noon hours: {data.hoursCounter.noon}</h5>
