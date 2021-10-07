@@ -80,21 +80,25 @@ const RenderEventsData = props => {
         <>
             <h3>Report ID: {props.row.id}</h3>
             <div className='production-container'>
-                <h4>Production:</h4>
-                <h6>Alerts:</h6>
-                <Carousel value={props.row.production.alerts} itemTemplate={alertsCarousel} numVisible={1} />
-                <hr/>
-                <h6>To Follow:</h6>
-                <Carousel value={props.row.production.follows} itemTemplate={followsCarousel} numVisible={1} />
+                <div style={{ marginLeft: 8 }}>
+                    <h4>Production:</h4>
+                    <h6>Alerts:</h6>
+                    <Carousel value={props.row.production.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                    <hr />
+                    <h6>To Follow:</h6>
+                    <Carousel value={props.row.production.follows} itemTemplate={followsCarousel} numVisible={1} />
+                </div>
             </div>
             {' '}
             <div className='staging-container'>
-                <h4>Staging:</h4>
-                <h6>Alerts:</h6>
-                <Carousel value={props.row.staging.alerts} itemTemplate={alertsCarousel} numVisible={1} />
-                <hr/>
-                <h6>To Follow:</h6>
-                <Carousel value={props.row.staging.follows} itemTemplate={followsCarousel} numVisible={1} />
+                <div style={{ marginLeft: 8 }}>
+                    <h4>Staging:</h4>
+                    <h6>Alerts:</h6>
+                    <Carousel value={props.row.staging.alerts} itemTemplate={alertsCarousel} numVisible={1} />
+                    <hr />
+                    <h6>To Follow:</h6>
+                    <Carousel value={props.row.staging.follows} itemTemplate={followsCarousel} numVisible={1} />
+                </div>
             </div>
             {submitClicked ? (<>
                 <Spinner animation="border" role="status">
@@ -103,17 +107,19 @@ const RenderEventsData = props => {
             </>)
                 :
                 (<>
-                    <h6>Comments:</h6>
-                    <Carousel value={props.row.comments} itemTemplate={commentsCarousel} numVisible={1} />
-                    <InputGroup>
-                        <Dropdown value={commenatedAlert} options={concatArrays(props.row).map(alert => alert.title)} onChange={(e) => commenatedAlertHandler(e.value)} style={{ width: '91%', marginBottom: '0.1%' }} placeholder="Select an alert/follow" />
-                    </InputGroup>
-                    <InputGroup>
-                        <FormControl as="textarea" name="Content" placeholder="Write here the comment" style={{ height: 120 }} onChange={handleOnChange} />
-                        <Button variant="outline-secondary" id="button-addon2" onClick={handleCommentSubmit}>
-                            Submit Comment
-                        </Button>
-                    </InputGroup>
+                    <div style={{ marginLeft: 8 }}>
+                        <h6>Comments:</h6>
+                        <Carousel value={props.row.comments} itemTemplate={commentsCarousel} numVisible={1} />
+                        <InputGroup>
+                            <Dropdown value={commenatedAlert} options={concatArrays(props.row).map(alert => alert.title)} onChange={(e) => commenatedAlertHandler(e.value)} style={{ width: '91%', marginBottom: '0.1%' }} placeholder="Select an alert/follow" />
+                        </InputGroup>
+                        <InputGroup>
+                            <FormControl as="textarea" name="Content" placeholder="Write here the comment" style={{ height: 120 }} onChange={handleOnChange} />
+                            <Button variant="outline-secondary" id="button-addon2" onClick={handleCommentSubmit}>
+                                Submit Comment
+                            </Button>
+                        </InputGroup>
+                    </div>
                 </>)}
 
         </>
