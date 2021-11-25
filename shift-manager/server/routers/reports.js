@@ -18,10 +18,6 @@ router.get('/getreports', async (req,res) => {
     } 
 })
 
-/**
- * HTTP POST req includes report fields, the data which sent from frontend server will be saved in req.body. 
- * Assumed that report contains the following fields: alerts, timestamp (still need to figure how to add picture)
- */
 router.post('/add-report', async (req,res) => {
     const report = req.body
     try {
@@ -116,9 +112,8 @@ router.post('/add-report', async (req,res) => {
               console.log('Email sent: ' + info.response);
             }
           });  
-          res.send('email sent')
 
-        res.send({message: `Report at ${report.timestamp} added successfully`})
+        res.send({message: `Report at ${report.time} added successfully`})
     } catch(e) {
         res.status(500).send(e) 
     }

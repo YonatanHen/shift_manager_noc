@@ -61,10 +61,11 @@ export const updateComments = (reportId, comment) => async (dispatch) => {
 }
  
 export const sendReport = (alerts, reporter) => async (dispatch) => {
-    axios.post('/add-report', { alerts, reporter}).then((res) => {
-        dispatch({
+    axios.post('/add-report', { alerts, reporter}).then( async (res) => {
+        await dispatch({
             type: 'send_report', 
         })
+        alert(`${res.data.message}`)
     }).catch((err) => {
         console.log(err)
     })

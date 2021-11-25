@@ -12,17 +12,11 @@ function CreateReportTable(props) {
 	const [selectedRow, selectedRowHandler] = useState(null)
 	const [displayDialog, displayDialogHandler] = useState(false)
 	let id = 0
-
-	const toast = useRef(null);
-
+	
 	const handleSubmit = async () => {
 		await props.setAlerts([])
 		props.sendReport(props.alerts, props.user ? props.user.given_name + ' ' + props.user.family_name : 'NOC')
 	}
-
-	// const accept = () => {
-	// 	toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-	// };
 
 	const footer = (
 		<>
