@@ -8,7 +8,7 @@ const bodyParser = require('body-parser')
 require('./database/mongodb')
 
 const app = express()
-const publicDirectoryPath = path.join(__dirname, '../public')
+app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.use(bodyParser.json())
@@ -16,14 +16,14 @@ app.use(cors())
 app.use(login)
 app.use(reports)
 app.use(shifts)
-app.use(express.static(publicDirectoryPath))
+// app.use(express.static(publicDirectoryPath))
 
 
 
 const port = process.env.PORT || 3001
 
 app.get('/', (req,res) => {
-    res.sendFile('index.html')
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
 })
 
 app.listen(port, () => {

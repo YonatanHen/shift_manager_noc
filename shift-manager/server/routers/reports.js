@@ -1,14 +1,13 @@
 const express = require('express')
 const router = new express.Router()
 
-const nodemailer = require('nodemailer')
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 const { comment } = require('postcss')
-
 var ObjectID = require('mongodb').ObjectID;
 
-/**
- * HTTP GET req - returns all of the reports in the db
- */
+require('dotenv').config()
+
 router.get('/getreports', async (req,res) => {
     try {
     const reports = await db.collection('reports').find({}).toArray() //Empty brackets will return all of the data.
@@ -51,6 +50,73 @@ router.post('/add-report', async (req,res) => {
         
         //Save report in db
         await db.collection('reports').insertOne(report)
+
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: `${process.env.EMAIL_ADDRESS}`,
+                pass: `${process.env.EMAIL_PASSWORD}`
+              },
+        });
+          
+          var mailOptions = {
+            from: 'af.nocreporter@gmail.com',
+            to: 'yehonatanh@accessfintech.com',
+            subject: `NOC Shift Report of ${report.reporter}`,
+            text: 'That was easy!',
+            html: `<h1 style="color:#32998d"> Report by ${report.reporter} at ${report.time} </h1>
+                    <h3 style="color:#32998d"> Production: </h3>
+                    <h4>
+                    alerts:
+                    </h4>
+                    ${report.production.alerts.map(alert => {
+                        return (
+                            `<hr>
+                            <h5>${alert.title} - ${alert.time}</h5>
+                            ${alert.content}`
+                        )
+                    })}
+                    <h4>
+                    follows:
+                    ${report.production.follows.map(follow => {
+                        return (
+                            `<hr>
+                            <h5>${follow.title} - ${follow.time}</h5>
+                            ${follow.content}`
+                        )
+                    })}
+                    </h4>
+                    <h3 style="color:#32998d"> Staging: </h3>
+                    <h4>
+                    alerts:
+                    </h4>
+                    ${report.staging.alerts.map(alert => {
+                        return (
+                            `<hr>
+                            <h5>${alert.title} - ${alert.time}</h5>
+                            ${alert.content}`
+                        )
+                    })}
+                    <h4>
+                    follows:
+                    ${report.staging.follows.map(follow => {
+                        return (
+                            `<hr>
+                            <h5>${follow.title} - ${follow.time}</h5>
+                            ${follow.content}`
+                        )
+                    }
+                )}`
+          }
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });  
+          res.send('email sent')
 
         res.send({message: `Report at ${report.timestamp} added successfully`})
     } catch(e) {
