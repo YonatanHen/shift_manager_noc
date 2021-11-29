@@ -11,7 +11,6 @@ require('dotenv').config()
 router.get('/getreports', async (req,res) => {
     try {
     const reports = await db.collection('reports').find({}).toArray() //Empty brackets will return all of the data.
-    // console.log(reports) 
     res.send(reports)
     } catch(e) {
         res.status(500).send(e) 
@@ -57,49 +56,59 @@ router.post('/add-report', async (req,res) => {
           
           var mailOptions = {
             from: `${process.env.EMAIL_ADDRESS}`,
-            to: `${process.env.TO}`,
+            // to: `${process.env.TO}`,
+            to: 'yehonatanh@accessfintech.com',
             subject: `NOC Shift Report of ${report.reporter}`,
             text: 'That was easy!',
             html: `<h1 style="color:#32998d"> Report by ${report.reporter} at ${report.time} </h1>
-                    <h3 style="color:#32998d"> Production: </h3>
-                    <h4>
+                    <div style="background-color: #32998d;">
+                    <h2 style="color:white"> Production: </h2>
+                    </div>
+                    <h2>
                     alerts:
-                    </h4>
+                    </h2>
                     ${report.production.alerts.map(alert => {
                         return (
-                            `<hr>
-                            <h5>${alert.title} - ${alert.time}</h5>
-                            ${alert.content}`
+                            `<div style="background-color: #c7c6c5; margin: 5px;">
+                            <h4>${alert.title} - ${alert.time}</h4>
+                            ${alert.content}
+                            </div>`
                         )
                     })}
-                    <h4>
-                    follows:
+                    <h2>
+                    follow ups:
+                    </h2>
                     ${report.production.follows.map(follow => {
                         return (
-                            `<hr>
-                            <h5>${follow.title} - ${follow.time}</h5>
-                            ${follow.content}`
+                            `<div style="background-color: #c7c6c5; margin: 5px;">
+                            <h4>${follow.title} - ${follow.time}</h4>
+                            ${follow.content}
+                            </div>`
                         )
                     })}
-                    </h4>
-                    <h3 style="color:#32998d"> Staging: </h3>
-                    <h4>
+                    <div style="background-color: #32998d;">
+                    <h2 style="color:white"> Staging: </h2>
+                    </div>
+                    <h2>
                     alerts:
-                    </h4>
+                    </h2>
                     ${report.staging.alerts.map(alert => {
                         return (
-                            `<hr>
-                            <h5>${alert.title} - ${alert.time}</h5>
-                            ${alert.content}`
+                            `<div style="background-color: #c7c6c5; margin: 5px; ">
+                            <h4>${alert.title} - ${alert.time}</h4>
+                            ${alert.content}
+                            </div>`
                         )
                     })}
-                    <h4>
-                    follows:
+                    <h2>
+                    follow ups:
+                    </h2>
                     ${report.staging.follows.map(follow => {
                         return (
-                            `<hr>
-                            <h5>${follow.title} - ${follow.time}</h5>
-                            ${follow.content}`
+                            `<div style="background-color: #c7c6c5; margin: 5px;">
+                            <h4>${follow.title} - ${follow.time}</h4>
+                            ${follow.content}
+                            </div>`
                         )
                     }
                 )}`

@@ -19,8 +19,8 @@ const Calendar = (props) => {
     })
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(async () => {
-        await props.getShifts()
+    useEffect(() => {
+        props.getShifts()
     }, [inputHandler, input, props.deleteShift, props.getShifts, props.shifts, FullCalendar])
 
     const handleDateClick = (arg) => {

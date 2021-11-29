@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
 MongoClient.connect(
-	'mongodb+srv://noc:%232QS%2A-F3mwxvUux@cluster0.goc5j.mongodb.net/shift-manager?retryWrites=true&w=majority',
+	// 'mongodb+srv://noc:%232QS%2A-F3mwxvUux@cluster0.goc5j.mongodb.net/shift-manager?retryWrites=true&w=majority',
+	`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@nocshiftorganizer.dcyx4.mongodb.net/shiftorganizer?retryWrites=true&w=majority`,
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
