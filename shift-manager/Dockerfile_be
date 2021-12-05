@@ -1,0 +1,12 @@
+FROM node
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app
+RUN npm install --legacy-peer-deps
+COPY . /usr/src/app
+RUN apt install
+EXPOSE 3001
+CMD ["npm","update"]
+CMD ["npm","run","server"]
+
+

@@ -76,5 +76,5 @@
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://internal-a19f119bf46c8437289059e3d6ac32f4-986540621.us-east-1.elb.amazonaws.com:3001/"
 }
