@@ -56,8 +56,7 @@ router.post('/add-report', async (req,res) => {
           
           var mailOptions = {
             from: `${process.env.EMAIL_ADDRESS}`,
-            // to: `${process.env.TO}`,
-            to: 'yehonatanh@accessfintech.com',
+            to: `${process.env.TO}`,
             subject: `NOC Shift Report of ${report.reporter}`,
             text: 'That was easy!',
             html: `<h1 style="color:#32998d"> Report by ${report.reporter} at ${report.time} </h1>
